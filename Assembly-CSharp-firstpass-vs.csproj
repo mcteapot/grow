@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+	<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+	<ProductVersion>10.0.20506</ProductVersion>
+	<SchemaVersion>2.0</SchemaVersion>
+	<ProjectGuid>{4C5EE0A5-14FD-77BD-5A88-F12E1540EDBC}</ProjectGuid>
+	<OutputType>Library</OutputType>
+	<AppDesignerFolder>Properties</AppDesignerFolder>
+	<RootNamespace></RootNamespace>
+	<AssemblyName>Assembly-CSharp-firstpass</AssemblyName>
+	<TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+	<FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+	<DebugSymbols>true</DebugSymbols>
+	<DebugType>full</DebugType>
+	<Optimize>false</Optimize>
+	<OutputPath>Temp\bin\Debug\</OutputPath>
+	<DefineConstants>DEBUG;TRACE;UNITY_WEBPLAYER;WEBPLUG;ENABLE_MICROPHONE;ENABLE_IMAGEEFFECTS;ENABLE_WEBCAM;ENABLE_AUDIO_FMOD;ENABLE_NETWORK;ENABLE_MONO;ENABLE_PHYSICS;ENABLE_TERRAIN;ENABLE_CACHING;ENABLE_SUBSTANCE;ENABLE_GENERICS;ENABLE_CLOTH;ENABLE_MOVIES;ENABLE_AUDIO;ENABLE_WWW;ENABLE_SHADOWS;ENABLE_DUCK_TYPING;UNITY_4_0_0;UNITY_4_0;ENABLE_PROFILER;UNITY_EDITOR</DefineConstants>
+	<ErrorReport>prompt</ErrorReport>
+	<WarningLevel>4</WarningLevel>
+	<NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+	<DebugType>pdbonly</DebugType>
+	<Optimize>true</Optimize>
+	<OutputPath>Temp\bin\Release\</OutputPath>
+	<DefineConstants>TRACE</DefineConstants>
+	<ErrorReport>prompt</ErrorReport>
+	<WarningLevel>4</WarningLevel>
+	<NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+	<Reference Include="System" />
+    <Reference Include="System.XML" />
+	<Reference Include="System.Core" />
+	<Reference Include="UnityEngine">
+	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEngine.dll</HintPath>
+	</Reference>
+	<Reference Include="UnityEditor">
+	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEditor.dll</HintPath>
+	</Reference>
+  </ItemGroup>
+  <ItemGroup>
+     <Compile Include="Assets\Plugins\Cloud System\Scripts\CS_Cloud.cs" />
+     <Compile Include="Assets\Plugins\Cloud System\Scripts\CS_ParticleData.cs" />
+     <Compile Include="Assets\Plugins\Cloud System\Scripts\Creator\CS_CreatorData.cs" />
+     <Compile Include="Assets\Plugins\Cloud System\Scripts\Renderer\CustomParticleSystem\CS_CustomShadingGroupRenderer.cs" />
+     <Compile Include="Assets\Plugins\Cloud System\Scripts\Renderer\CustomParticleSystem\CS_CustomTintRenderer.cs" />
+     <Compile Include="Assets\Plugins\Cloud System\Scripts\Renderer\CustomParticleSystem\CS_CustomVerticalColorRenderer.cs" />
+     <Compile Include="Assets\Plugins\Cloud System\Scripts\Renderer\CustomParticleSystem\CS_CustomVerticalColorWithShadingGroupRenderer.cs" />
+     <Compile Include="Assets\Plugins\Cloud System\Scripts\Renderer\ShurikenParticleSystem\CS_ShurikenShadingGroupRenderer.cs" />
+     <Compile Include="Assets\Plugins\Cloud System\Scripts\Renderer\ShurikenParticleSystem\CS_ShurikenTintRenderer.cs" />
+     <Compile Include="Assets\Plugins\Cloud System\Scripts\Renderer\ShurikenParticleSystem\CS_ShurikenVerticalColorRenderer.cs" />
+     <Compile Include="Assets\Plugins\Cloud System\Scripts\Renderer\ShurikenParticleSystem\CS_ShurikenVerticalColorWithShadingGroupRenderer.cs" />
+     <Compile Include="Assets\Plugins\Cloud System\Scripts\Renderer\SimpleCustomParticleSystem\CS_SimpleCustomShadingGroupRenderer.cs" />
+     <Compile Include="Assets\Plugins\Cloud System\Scripts\Renderer\SimpleCustomParticleSystem\CS_SimpleCustomTintRenderer.cs" />
+     <Compile Include="Assets\Plugins\Cloud System\Scripts\Renderer\SimpleCustomParticleSystem\CS_SimpleCustomVerticalColorRenderer.cs" />
+     <Compile Include="Assets\Plugins\Cloud System\Scripts\Renderer\SimpleCustomParticleSystem\CS_SimpleCustomVerticalColorWithShadingGroupRenderer.cs" />
+     <Compile Include="Assets\Plugins\Cloud System\Scripts\Renderer\UnityParticleSystem\CS_UnityParticleSystemShadingGroupRenderer.cs" />
+     <Compile Include="Assets\Plugins\Cloud System\Scripts\Renderer\UnityParticleSystem\CS_UnityParticleSystemTintRenderer.cs" />
+     <Compile Include="Assets\Plugins\Cloud System\Scripts\Renderer\UnityParticleSystem\CS_UnityParticleSystemVerticalColorRenderer.cs" />
+     <Compile Include="Assets\Plugins\Cloud System\Scripts\Renderer\UnityParticleSystem\CS_UnityParticleSystemVerticalColorWithShadingGroupRenderer.cs" />
+     <Compile Include="Assets\Standard Assets\Camera Scripts\MouseLook.cs" />
+     <None Include="Assets\Shaders\Fx\Additive.shader" />
+     <None Include="Assets\Plugins\Cloud System\Resources\Shaders\MobileLightningCloudShader.shader" />
+     <None Include="Assets\Plugins\Cloud System\Resources\Shaders\MobileCloudLightingModel.cginc" />
+     <None Include="Assets\Plugins\Cloud System\CloudSystemFree.Runtime.xml" />
+     <None Include="Assets\Plugins\Cloud System\Resources\Shaders\LightningCloudShader.shader" />
+     <None Include="Assets\Plugins\Cloud System\Resources\Shaders\CloudLightingModel.cginc" />
+     <None Include="Assets\Plugins\Cloud System\Resources\Shaders\CloudShader.shader" />
+     <None Include="Assets\Plugins\Cloud System\Release Notes.txt" />
+     <None Include="Assets\Plugins\Cloud System\Resources\Shaders\SoftCloudShader.shader" />
+     <None Include="Assets\Plugins\Cloud System\Readme.txt" />
+     <None Include="Assets\Shaders\Fx\InterlacePatternAdditive.shader" />
+ <Reference Include="Assets\Plugins\Cloud System\CloudSystemFree.Runtime">
+ <HintPath>Assets\Plugins\Cloud System\CloudSystemFree.Runtime.dll</HintPath>
+ </Reference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+	   Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  
+</Project>
