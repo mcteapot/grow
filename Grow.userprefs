@@ -1,8 +1,7 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Temp/Compiled-TreeCreatorBark.shader">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/lightSunScript.js">
     <Files>
-      <File FileName="Temp/Compiled-TreeCreatorBark.shader" Line="7" Column="2" />
       <File FileName="Assets/Scripts/sunScript.js" Line="1" Column="1" />
       <File FileName="Assets/Scripts/gameManagerScript.js" Line="1" Column="1" />
       <File FileName="Assets/Scripts/lightSunScript.js" Line="1" Column="1" />

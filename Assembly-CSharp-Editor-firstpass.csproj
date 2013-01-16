@@ -58,14 +58,14 @@
      <None Include="Assets\Plugins\Cloud System\Resources\Shaders\SoftCloudShader.shader" />
      <None Include="Assets\Plugins\Cloud System\Readme.txt" />
      <None Include="Assets\Shaders\Fx\InterlacePatternAdditive.shader" />
- <Reference Include="\Applications\Unity\Unity.app\Contents\Frameworks\Managed\UnityEditor.Graphs">
- <HintPath>\Applications\Unity\Unity.app\Contents\Frameworks\Managed\UnityEditor.Graphs.dll</HintPath>
- </Reference>
  <Reference Include="Assets\Plugins\Cloud System\CloudSystemFree.Runtime">
  <HintPath>Assets\Plugins\Cloud System\CloudSystemFree.Runtime.dll</HintPath>
  </Reference>
  <Reference Include="Assets\Plugins\Editor\Cloud System\CloudSystemFree.Editor">
  <HintPath>Assets\Plugins\Editor\Cloud System\CloudSystemFree.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="\Applications\Unity\Unity.app\Contents\Frameworks\Managed\UnityEditor.Graphs">
+ <HintPath>\Applications\Unity\Unity.app\Contents\Frameworks\Managed\UnityEditor.Graphs.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
