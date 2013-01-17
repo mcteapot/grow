@@ -1,20 +1,21 @@
 #pragma strict
 
-var target : Transform;
+var onAnimation : AnimationClip;
+var offAnimation : AnimationClip;
 
 function Start () {
-	lookAtCamera();
+
 }
 
 function Update () {
-	lookAtCamera();
+
 }
 
-function lookAtCamera () {
-    var relativePos : Vector3 = target.position - transform.position;
-    //print("ROTATION: " + Quaternion.LookRotation(relativePos).eulerAngles.y);
-    var yRotation : float = Quaternion.LookRotation(relativePos).eulerAngles.y;
+function beamOn () {
+	animation.Play(onAnimation.name);
+}
 
-    transform.rotation = Quaternion.Euler(Vector3(0, yRotation - 180, 0));
-
+function beamOff () {
+	//transform.localScale = Vector3(1, 0, 1);
+	animation.Play(offAnimation.name);
 }

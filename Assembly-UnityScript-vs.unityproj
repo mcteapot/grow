@@ -48,6 +48,7 @@
      <Compile Include="Assets\Scripts\gameManagerScript.js" />
      <Compile Include="Assets\Scripts\lightSunScript.js" />
      <Compile Include="Assets\Scripts\sunBeamScript.js" />
+     <Compile Include="Assets\Scripts\sunLookScript.js" />
      <Compile Include="Assets\Scripts\sunScript.js" />
      <None Include="Assets\Shaders\Fx\Additive.shader" />
      <None Include="Assets\Plugins\Cloud System\Resources\Shaders\MobileLightningCloudShader.shader" />

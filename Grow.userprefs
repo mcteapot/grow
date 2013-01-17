@@ -1,14 +1,6 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/lightSunScript.js">
-    <Files>
-      <File FileName="Assets/Scripts/sunScript.js" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/gameManagerScript.js" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/lightSunScript.js" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/backgroundScript.js" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/sunBeamScript.js" Line="1" Column="1" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
