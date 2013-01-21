@@ -18,7 +18,7 @@
 	<DebugType>full</DebugType>
 	<Optimize>false</Optimize>
 	<OutputPath>Temp\bin\Debug\</OutputPath>
-	<DefineConstants>DEBUG;TRACE;UNITY_WEBPLAYER;WEBPLUG;ENABLE_MICROPHONE;ENABLE_IMAGEEFFECTS;ENABLE_WEBCAM;ENABLE_AUDIO_FMOD;ENABLE_NETWORK;ENABLE_MONO;ENABLE_PHYSICS;ENABLE_TERRAIN;ENABLE_CACHING;ENABLE_SUBSTANCE;ENABLE_GENERICS;ENABLE_CLOTH;ENABLE_MOVIES;ENABLE_AUDIO;ENABLE_WWW;ENABLE_SHADOWS;ENABLE_DUCK_TYPING;UNITY_4_0_0;UNITY_4_0;ENABLE_PROFILER;UNITY_EDITOR</DefineConstants>
+	<DefineConstants>DEBUG;TRACE;UNITY_WEBPLAYER;WEBPLUG;ENABLE_MICROPHONE;ENABLE_IMAGEEFFECTS;ENABLE_WEBCAM;ENABLE_AUDIO_FMOD;ENABLE_NETWORK;ENABLE_MONO;ENABLE_PHYSICS;ENABLE_TERRAIN;ENABLE_CACHING;ENABLE_SUBSTANCE;ENABLE_GENERICS;ENABLE_CLOTH;ENABLE_MOVIES;ENABLE_AUDIO;ENABLE_WWW;ENABLE_SHADOWS;ENABLE_DUCK_TYPING;UNITY_4_0_0;UNITY_4_0;ENABLE_PROFILER;UNITY_EDITOR;UNITY_TEAM_LICENSE</DefineConstants>
 	<ErrorReport>prompt</ErrorReport>
 	<WarningLevel>4</WarningLevel>
 	<NoWarn>0169</NoWarn>
@@ -47,6 +47,9 @@
      <Compile Include="Assets\Plugins\Editor\Cloud System\Scripts\CS_CloudEditor.cs" />
      <Compile Include="Assets\Plugins\Editor\Cloud System\Scripts\CS_CloudRendererTypeLookup.cs" />
      <Compile Include="Assets\Plugins\Editor\Cloud System\Scripts\Support\CS_CloudPrefab.cs" />
+     <None Include="Assets\Standard Assets\Projectors\Guidelines.txt" />
+     <None Include="Assets\Shaders\Fx\Rain.shader" />
+     <None Include="Assets\Standard Assets\Projectors\Sources\Shaders\Projector Multiply.shader" />
      <None Include="Assets\Shaders\Fx\Additive.shader" />
      <None Include="Assets\Plugins\Cloud System\Resources\Shaders\MobileLightningCloudShader.shader" />
      <None Include="Assets\Plugins\Cloud System\Resources\Shaders\MobileCloudLightingModel.cginc" />
@@ -54,6 +57,7 @@
      <None Include="Assets\Plugins\Cloud System\Resources\Shaders\LightningCloudShader.shader" />
      <None Include="Assets\Plugins\Cloud System\Resources\Shaders\CloudLightingModel.cginc" />
      <None Include="Assets\Plugins\Cloud System\Resources\Shaders\CloudShader.shader" />
+     <None Include="Assets\Standard Assets\Projectors\Sources\Shaders\Projector Light.shader" />
      <None Include="Assets\Plugins\Cloud System\Release Notes.txt" />
      <None Include="Assets\Plugins\Cloud System\Resources\Shaders\SoftCloudShader.shader" />
      <None Include="Assets\Plugins\Cloud System\Readme.txt" />

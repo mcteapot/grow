@@ -9,8 +9,17 @@ internal var positionY : float;
 
 internal var isActive : boolean;
 internal var isBounding : boolean;
-internal var isSetY : boolean;
+internal var isAlive : boolean;
+internal var isAnimate : boolean;
 internal var amoutToMove : float;
+
+internal var cloudFadingOn : float;
+internal var cloundTintAOn : float;
+internal var cloudFadingOff : float;
+internal var cloundTintAOff : float;
+
+internal var cloudScript : CS_Cloud;
+//private var aVelocity : float = 0.0;
 
 var cam : Camera;
 var rain : GameObject;
@@ -24,25 +33,42 @@ var boundRight : float;
 var boundLeft : float;
 var correction : float;
 
+var cloundLifeRate : float;
+
+var onAnimation : AnimationClip;
+var offAnimation : AnimationClip;
+
 function Start () {
+	cloudScript = GetComponent (CS_Cloud);
+	
 	positionZ = transform.position.z;
 	positionY = transform.position.y;
+
+	cloudFadingOn = cloudScript.Fading;
+	cloundTintAOn = cloudScript.Tint.a;
 	isActive = false;
 	isBounding = false;
-	isSetY = false;
-	
+	isAlive = true;
+	//isAnimate = false;
+
 }
 
 function Update () {
 	checkBound();
 	moveCloud();
+	animateClound();
+
+	//print(cloudScript.Tint);
+	//print(cloudScript.Tint);	
+	//print(cloudScript.Tint);
+
 }
 
 function OnMouseDown () {
 	isActive = true;
 	isBounding = true;
-	isSetY = false;	
     moveDown();
+    cloudOn();
 }
 
 
@@ -52,8 +78,10 @@ function OnMouseDrag () {
 
 function OnMouseUp () {
 	if(isActive) {
+		cloundTintAOn = cloudScript.Tint.a;
 		isActive = false;
 		isBounding = false;
+		cloudOff();
 	}
 }
 
@@ -79,7 +107,7 @@ function moveDrag () {
 
 // check if object is in screen bounds
 function checkBound () {
-	print("transformPOS: " + transform.position);
+	//print("transformPOS: " + transform.position);
 	if(transform.position.x >= boundRight && isBounding) {
 		OnMouseUp();
 		//transform.position.x -= correction;
@@ -95,4 +123,54 @@ function moveCloud () {
 		amoutToMove = moveRate * Time.deltaTime;
 		transform.Translate(Vector3.forward * amoutToMove);
 	}
+}
+
+// turn on cloud 
+function cloudOn () {
+	//print("ANIMATING");
+	animation.Play(onAnimation.name);
+}
+
+// turn off cloud 
+function cloudOff () {
+	//transform.localScale = Vector3(1, 0, 1);
+	animation.Play(offAnimation.name);
+}
+
+function resetCloud () {
+
+}
+
+function animateClound () {
+	//print("ANIMATING");
+	var aVelocity : float = 0.0;
+	if(isAlive){
+		if(animation.isPlaying && isActive) {
+			// animating and active
+			print("ANIMATING TINT" + cloudScript.Tint.a);
+			print("ANIMATING FADING" + cloudScript.Fading);
+			print("aVelocity" + aVelocity);
+			cloudScript.Fading = Mathf.SmoothDamp(cloudScript.Fading, 1.0, aVelocity, 0.4);
+			//print("aVelocity" + aVelocity);
+			cloudScript.Tint.a = Mathf.SmoothDamp(cloudScript.Tint.a, cloundTintAOn * 0.35, aVelocity, 0.4);
+			//print("aVelocity" + aVelocity);
+		} else if(animation.isPlaying && !isActive) {
+			// animating and not active
+			print("ANIMATING TINT" + cloudScript.Tint.a);
+			print("ANIMATING FADING" + cloudScript.Fading);
+			print("aVelocity" + aVelocity);
+			cloudScript.Fading = Mathf.SmoothDamp(cloudScript.Fading, cloudFadingOn, aVelocity, 0.2);
+			//print("aVelocity" + aVelocity);
+			//cloudScript.Tint.a = Mathf.SmoothDamp(cloudScript.Tint.a, cloundTintAOn, aVelocity, 0.2);
+			//print("aVelocity" + aVelocity);
+		} else if(!animation.isPlaying && isActive) {
+			// not animating and active
+			print("FUCK YO SHIT" + cloudScript.Tint.a);
+			cloudScript.Tint.a = Mathf.MoveTowards(cloudScript.Tint.a, 0.05, cloundLifeRate * Time.deltaTime);
+
+
+		}
+	}
+
+
 }
