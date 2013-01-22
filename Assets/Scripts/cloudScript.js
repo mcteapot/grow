@@ -2,6 +2,8 @@
 
 #pragma strict
 
+static var cloundNumber : int;
+
 internal var screenPos : Vector3;
 internal var offset : Vector3;
 internal var positionZ : float;
@@ -19,15 +21,14 @@ internal var cloudFadingOff : float;
 internal var cloundTintAOff : float;
 
 internal var cloudScript : CS_Cloud;
-//private var aVelocity : float = 0.0;
 
 var cam : Camera;
-var rain : GameObject;
-var groundLight : GameObject;
+var darkShadow : GameObject;
 
 //var positionY : float;
 //var spaceY : float;
 var moveRate : float;
+var deathPoint : float;
 
 var boundRight : float;
 var boundLeft : float;
@@ -57,6 +58,7 @@ function Update () {
 	checkBound();
 	moveCloud();
 	animateClound();
+	killCloud();
 
 	//print(cloudScript.Tint);
 	//print(cloudScript.Tint);	
@@ -137,8 +139,12 @@ function cloudOff () {
 	animation.Play(offAnimation.name);
 }
 
-function resetCloud () {
-
+function killCloud () {
+	//print("FUCK YO SHIT" + cloudScript.Tint.a);
+	if(cloudScript.Tint.a <= deathPoint){
+		isActive = false;
+		Destroy(gameObject);
+	}
 }
 
 function animateClound () {
@@ -147,30 +153,35 @@ function animateClound () {
 	if(isAlive){
 		if(animation.isPlaying && isActive) {
 			// animating and active
-			print("ANIMATING TINT" + cloudScript.Tint.a);
-			print("ANIMATING FADING" + cloudScript.Fading);
-			print("aVelocity" + aVelocity);
+			//print("ANIMATING TINT" + cloudScript.Tint.a);
+			//print("ANIMATING FADING" + cloudScript.Fading);
+			//print("aVelocity" + aVelocity);
 			cloudScript.Fading = Mathf.SmoothDamp(cloudScript.Fading, 1.0, aVelocity, 0.4);
 			//print("aVelocity" + aVelocity);
 			cloudScript.Tint.a = Mathf.SmoothDamp(cloudScript.Tint.a, cloundTintAOn * 0.35, aVelocity, 0.4);
 			//print("aVelocity" + aVelocity);
 		} else if(animation.isPlaying && !isActive) {
 			// animating and not active
-			print("ANIMATING TINT" + cloudScript.Tint.a);
-			print("ANIMATING FADING" + cloudScript.Fading);
-			print("aVelocity" + aVelocity);
+			//print("ANIMATING TINT" + cloudScript.Tint.a);
+			//print("ANIMATING FADING" + cloudScript.Fading);
+			//print("aVelocity" + aVelocity);
 			cloudScript.Fading = Mathf.SmoothDamp(cloudScript.Fading, cloudFadingOn, aVelocity, 0.2);
 			//print("aVelocity" + aVelocity);
 			//cloudScript.Tint.a = Mathf.SmoothDamp(cloudScript.Tint.a, cloundTintAOn, aVelocity, 0.2);
 			//print("aVelocity" + aVelocity);
 		} else if(!animation.isPlaying && isActive) {
 			// not animating and active
-			print("FUCK YO SHIT" + cloudScript.Tint.a);
+			//print("FUCK YO SHIT" + cloudScript.Tint.a);
 			cloudScript.Tint.a = Mathf.MoveTowards(cloudScript.Tint.a, 0.05, cloundLifeRate * Time.deltaTime);
 
 
 		}
 	}
 
+
+}
+
+function getActive () {
+	return isActive;
 
 }

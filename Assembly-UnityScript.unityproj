@@ -44,15 +44,15 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\backgroundScript.js" />
-     <Compile Include="Assets\Scripts\cloudScript.js" />
-     <Compile Include="Assets\Scripts\cloudShadowScript.js" />
-     <Compile Include="Assets\Scripts\gameManagerScript.js" />
-     <Compile Include="Assets\Scripts\lightSunScript.js" />
-     <Compile Include="Assets\Scripts\sunBeamScript.js" />
-     <Compile Include="Assets\Scripts\sunColliderScript.js" />
-     <Compile Include="Assets\Scripts\sunLookScript.js" />
-     <Compile Include="Assets\Scripts\sunScript.js" />
+     <Compile Include="Assets\Scripts\BackgroundScript.js" />
+     <Compile Include="Assets\Scripts\CloudScript.js" />
+     <Compile Include="Assets\Scripts\CloudShadowScript.js" />
+     <Compile Include="Assets\Scripts\GameManagerScript.js" />
+     <Compile Include="Assets\Scripts\LightSunScript.js" />
+     <Compile Include="Assets\Scripts\SunBeamScript.js" />
+     <Compile Include="Assets\Scripts\SunColliderScript.js" />
+     <Compile Include="Assets\Scripts\SunLookScript.js" />
+     <Compile Include="Assets\Scripts\SunScript.js" />
      <None Include="Assets\Standard Assets\Projectors\Guidelines.txt" />
      <None Include="Assets\Shaders\Fx\Rain.shader" />
      <None Include="Assets\Standard Assets\Projectors\Sources\Shaders\Projector Multiply.shader" />
