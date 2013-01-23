@@ -53,6 +53,7 @@ function Start () {
 	isBounding = false;
 	isAlive = true;
 
+	cloudScript.Sun = cloundLight;
 	//isAnimate = false;
 
 }
