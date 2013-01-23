@@ -19,12 +19,15 @@ function checkCloundActive() {
 	cloundScript = cloudObject01.GetComponent(CloudScript);
 	var shadowScript : CloudShadowScript;
 	shadowScript = cloudShadow.GetComponent(CloudShadowScript);
+	//print(cloundScript.isActive);
+	/*
 	if(cloundScript.getActive()) {
 		shadowScript.setActive(true);
 		cloudShadow.position = cloudObject01.position;
 	} else {
 		shadowScript.setActive(false);
 	}
+	*/
 	//cloudObject01.SendMessage("getActive", SendMessageOptions.RequireReceiver);
 	//print(cloudObject01.SendMessage("getActive", SendMessageOptions.RequireReceiver));
 }

@@ -47,7 +47,8 @@ function animateShadow () {
 
 	}
 }
-
+/*
 function setActive (newActive : boolean) {
 	isActive = newActive;
 }
+*/

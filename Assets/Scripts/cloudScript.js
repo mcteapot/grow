@@ -17,13 +17,12 @@ internal var amoutToMove : float;
 
 internal var cloudFadingOn : float;
 internal var cloundTintAOn : float;
-internal var cloudFadingOff : float;
-internal var cloundTintAOff : float;
+
 
 internal var cloudScript : CS_Cloud;
 
 var cam : Camera;
-var darkShadow : GameObject;
+//var darkShadow : GameObject;
 
 //var positionY : float;
 //var spaceY : float;
@@ -35,9 +34,12 @@ var boundLeft : float;
 var correction : float;
 
 var cloundLifeRate : float;
+var cloudDeath : float;
 
 var onAnimation : AnimationClip;
 var offAnimation : AnimationClip;
+
+var cloundLight : Transform;
 
 function Start () {
 	cloudScript = GetComponent (CS_Cloud);
@@ -50,6 +52,7 @@ function Start () {
 	isActive = false;
 	isBounding = false;
 	isAlive = true;
+
 	//isAnimate = false;
 
 }
@@ -58,7 +61,7 @@ function Update () {
 	checkBound();
 	moveCloud();
 	animateClound();
-	killCloud();
+	//killCloud();
 
 	//print(cloudScript.Tint);
 	//print(cloudScript.Tint);	
@@ -138,7 +141,7 @@ function cloudOff () {
 	//transform.localScale = Vector3(1, 0, 1);
 	animation.Play(offAnimation.name);
 }
-
+/*
 function killCloud () {
 	//print("FUCK YO SHIT" + cloudScript.Tint.a);
 	if(cloudScript.Tint.a <= deathPoint){
@@ -146,7 +149,7 @@ function killCloud () {
 		Destroy(gameObject);
 	}
 }
-
+*/
 function animateClound () {
 	//print("ANIMATING");
 	var aVelocity : float = 0.0;
@@ -158,7 +161,7 @@ function animateClound () {
 			//print("aVelocity" + aVelocity);
 			cloudScript.Fading = Mathf.SmoothDamp(cloudScript.Fading, 1.0, aVelocity, 0.4);
 			//print("aVelocity" + aVelocity);
-			cloudScript.Tint.a = Mathf.SmoothDamp(cloudScript.Tint.a, cloundTintAOn * 0.35, aVelocity, 0.4);
+			//cloudScript.Tint.a = Mathf.SmoothDamp(cloudScript.Tint.a, cloundTintAOn, aVelocity, 0.4);
 			//print("aVelocity" + aVelocity);
 		} else if(animation.isPlaying && !isActive) {
 			// animating and not active
@@ -172,16 +175,11 @@ function animateClound () {
 		} else if(!animation.isPlaying && isActive) {
 			// not animating and active
 			//print("FUCK YO SHIT" + cloudScript.Tint.a);
-			cloudScript.Tint.a = Mathf.MoveTowards(cloudScript.Tint.a, 0.05, cloundLifeRate * Time.deltaTime);
+			cloudScript.Tint.a = Mathf.MoveTowards(cloudScript.Tint.a, cloudDeath, cloundLifeRate * Time.deltaTime);
 
 
 		}
 	}
 
-
-}
-
-function getActive () {
-	return isActive;
 
 }
