@@ -1,5 +1,7 @@
 #pragma strict
 
+internal var cloudActive : Transform[];
+
 var cloudPrefabs : Transform[];
 
 //var cloudObject01 : Transform;
@@ -8,15 +10,21 @@ var cloudShadow : Transform;
 function Start () {
 
 
+	//print("arraySize: " + cloudActive.length);
+	//print("cloudPrefabs: " + cloudPrefabs.length);
+	//cloudActive = new Array();
+	cloudActive = createCloundsStart();
+	print(cloudActive.length);
+
 }
 
 
 
 function Update () {
-	checkCloundActive();
+	//checkCloundActive();
 }
 
-function checkCloundActive() {
+function checkCloundActive () {
 /*
 	var cloundScript : CloudScript;
 	cloundScript = cloudObject01.GetComponent(CloudScript);
@@ -35,5 +43,37 @@ function checkCloundActive() {
 	//print(cloudObject01.SendMessage("getActive", SendMessageOptions.RequireReceiver));
 }
 
+function createCloundsStart () {
+	//var i : int = 3;
+	var clouds = new Array();
+	for(var i:int=0; i<3; i++) {
+		//print("VECTORS: " + getRandomStartCloudPosition());
+		var numb = Random.Range(0, 3);
+		//print(numb);
+		//var rotation = Quaternion.identity;
+		//rotation.eulerAngles = Vector3(0, 90, 0);
+		var cloud : Transform =  Instantiate(cloudPrefabs[numb], getRandomStartCloudPosition(i), cloudPrefabs[numb].rotation);
+		//print(cloud.position);
+		//Instantiate (prefab, Vector3(i * 2.0, 0, 0), Quaternion.identity);
+		clouds.Add(cloud);
+	}
+	//print(clouds.length);
+	return clouds;
+}
+
+function getRandomStartCloudPosition (num : int) {
+	var firstNum : float;
+	var secondNum : float;
+	if(num >= 0) {
+		firstNum = num * 10.0;
+		secondNum = num * 10.0;
+	} else {
+		return Vector3(0, 0, 0);
+	}
+	//print(firstNum);
+	//print(secondNum);
+	var aVector : Vector3 = Vector3(Random.Range((0.5 + firstNum), (3.4 + secondNum)), Random.Range(10.5, 13.1), Random.Range(21.5, 23.2));
+	return aVector;
+}
 
 
