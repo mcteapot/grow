@@ -47,8 +47,11 @@ function animateShadow () {
 
 	}
 }
-/*
+
 function setActive (newActive : boolean) {
 	isActive = newActive;
+	if(!isActive){
+		//animateShadow();
+		transform.position = Vector3(0, 0, 0);
+	}
 }
-*/

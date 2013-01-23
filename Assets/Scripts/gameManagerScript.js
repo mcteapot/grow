@@ -2,6 +2,8 @@
 
 internal var cloudActive : Transform[];
 
+var shadowCorrection : float;
+
 var cloudPrefabs : Transform[];
 
 //var cloudObject01 : Transform;
@@ -21,10 +23,27 @@ function Start () {
 
 
 function Update () {
-	//checkCloundActive();
+	checkCloundActive();
 }
 
 function checkCloundActive () {
+	for(var i:int=0; i<3; i++) {
+		var cloundScript : CloudScript;
+		cloundScript = cloudActive[i].GetComponent(CloudScript);
+		var shadowScript : CloudShadowScript;
+		shadowScript = cloudShadow.GetComponent(CloudShadowScript);
+		print(cloundScript.isActive);
+		
+		if(cloundScript.isActive) {
+			cloudShadow.position = Vector3(cloudActive[i].position.x + shadowCorrection, cloudActive[i].position.y, cloudActive[i].position.z);
+			shadowScript.setActive(true);
+			break;
+		}
+
+		if(i == 2) {
+			shadowScript.setActive(false);
+		}
+	}
 /*
 	var cloundScript : CloudScript;
 	cloundScript = cloudObject01.GetComponent(CloudScript);
