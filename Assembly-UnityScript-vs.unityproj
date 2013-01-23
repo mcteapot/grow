@@ -47,10 +47,10 @@
      <Compile Include="Assets\Scripts\BackgroundScript.js" />
      <Compile Include="Assets\Scripts\CloudScript.js" />
      <Compile Include="Assets\Scripts\CloudShadowScript.js" />
+     <Compile Include="Assets\Scripts\ColliderScript.js" />
      <Compile Include="Assets\Scripts\GameManagerScript.js" />
      <Compile Include="Assets\Scripts\LightSunScript.js" />
      <Compile Include="Assets\Scripts\SunBeamScript.js" />
-     <Compile Include="Assets\Scripts\SunColliderScript.js" />
      <Compile Include="Assets\Scripts\SunLookScript.js" />
      <Compile Include="Assets\Scripts\SunScript.js" />
      <None Include="Assets\Standard Assets\Projectors\Guidelines.txt" />
