@@ -82,7 +82,6 @@ function OnMouseDrag () {
 
 function OnMouseUp () {
 	if(isActive) {
-		cloundTintAOn = cloudScript.Tint.a;
 		isActive = false;
 		isBounding = false;
 		cloudOff();
@@ -175,6 +174,7 @@ function animateClound () {
 		// not animating and active
 		//print("FUCK YO SHIT" + cloudScript.Tint.a);
 		cloudScript.Tint.a = Mathf.MoveTowards(cloudScript.Tint.a, cloudDeath, cloundLifeRate * Time.deltaTime);
+		cloundTintAOn = cloudScript.Tint.a;
 
 	}
 	
