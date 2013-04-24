@@ -1,17 +1,18 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/gameManagerScript.js">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GameManager.cs">
     <Files>
-      <File FileName="Assets/Scripts/sunScript.js" Line="9" Column="25" />
-      <File FileName="Assets/Scripts/gameManagerScript.js" Line="37" Column="1" />
+      <File FileName="Assets/Scripts/sunScript.js" Line="118" Column="19" />
       <File FileName="Assets/Scripts/cloudScript.js" Line="14" Column="18" />
       <File FileName="Assets/Scripts/cloudShadowScript.js" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/BackgroundAlpha.cs" Line="17" Column="1" />
-      <File FileName="Assets/Scripts/SunBeam.cs" Line="22" Column="45" />
-      <File FileName="Assets/Scripts/LinkCollider.cs" Line="5" Column="1" />
-      <File FileName="Assets/Scripts/SunLook.cs" Line="35" Column="28" />
-      <File FileName="Assets/Scripts/LinkLightSun.cs" Line="20" Column="16" />
-      <File FileName="Assets/Scripts/CloudShadow.cs" Line="51" Column="78" />
+      <File FileName="Assets/Scripts/gameManagerScript.js" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/BackgroundAlpha.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/SunBeam.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/LinkCollider.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/SunLook.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/LinkLightSun.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/CloudShadow.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GameManager.cs" Line="28" Column="6" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

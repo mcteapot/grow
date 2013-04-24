@@ -45,7 +45,9 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\BackgroundAlpha.cs" />
+     <Compile Include="Assets\Scripts\CloudManager.cs" />
      <Compile Include="Assets\Scripts\CloudShadow.cs" />
+     <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\LinkCollider.cs" />
      <Compile Include="Assets\Scripts\LinkLightSun.cs" />
      <Compile Include="Assets\Scripts\SunBeam.cs" />
