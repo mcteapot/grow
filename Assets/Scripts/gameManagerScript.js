@@ -34,14 +34,16 @@ function checkCloundActive () {
 		var activeClound : Transform = cloudActive[i] as Transform;
 		var cloundScript : CloudScript;
 		cloundScript = activeClound.GetComponent(CloudScript);
-		var shadowScript : CloudShadowScript;
-		shadowScript = cloudShadow.GetComponent(CloudShadowScript);
+		//var shadowScript : CloudShadow;
+		//shadowScript = cloudShadow.GetComponent(CloudShadow);
 		//print(cloundScript.isActive);
 		//print(cloundScript.cloundTintAOn);
 		if(cloundScript.isActive) {
 			cloudShadow.position = Vector3(activeClound.position.x + shadowCorrection, activeClound.position.y, activeClound.position.z);
 			if(cloundScript.cloundTintAOn <= 0.06) {
-				shadowScript.setActive(false);
+				cloudShadow.SendMessage("setActive", false);
+				//shadowScript.setActive(false);
+				
 				print("cloud destoryed");
 				//var activeGameObjectCloud : GameObject = cloudActive[i];
 				Destroy(activeClound.gameObject);
@@ -49,13 +51,15 @@ function checkCloundActive () {
 				cloudActive.Add(createCloud());
 				break;
 			} else {
-				shadowScript.setActive(true);
+				cloudShadow.SendMessage("setActive", true);
+				//shadowScript.setActive(true);
 			}
 			break;
 		}
 
 		if(i == (cloudActive.Count - 1)) {
-			shadowScript.setActive(false);
+			cloudShadow.SendMessage("setActive", false);
+			//shadowScript.setActive(false);
 		}
 	}
 

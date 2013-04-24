@@ -18,7 +18,7 @@
 	<DebugType>full</DebugType>
 	<Optimize>false</Optimize>
 	<OutputPath>Temp\bin\Debug\</OutputPath>
-	<DefineConstants>DEBUG;TRACE;UNITY_WEBPLAYER;WEBPLUG;ENABLE_MICROPHONE;ENABLE_IMAGEEFFECTS;ENABLE_WEBCAM;ENABLE_AUDIO_FMOD;ENABLE_NETWORK;ENABLE_MONO;ENABLE_PHYSICS;ENABLE_TERRAIN;ENABLE_CACHING;ENABLE_SUBSTANCE;ENABLE_GENERICS;ENABLE_CLOTH;ENABLE_MOVIES;ENABLE_AUDIO;ENABLE_WWW;ENABLE_SHADOWS;ENABLE_DUCK_TYPING;UNITY_4_0_0;UNITY_4_0;ENABLE_PROFILER;UNITY_EDITOR</DefineConstants>
+	<DefineConstants>DEBUG;TRACE;UNITY_WEBPLAYER;WEBPLUG;ENABLE_MICROPHONE;ENABLE_IMAGEEFFECTS;ENABLE_WEBCAM;ENABLE_AUDIO_FMOD;ENABLE_NETWORK;ENABLE_MONO;ENABLE_PHYSICS;ENABLE_TERRAIN;ENABLE_CACHING;ENABLE_SUBSTANCE;ENABLE_GENERICS;ENABLE_CLOTH;ENABLE_MOVIES;ENABLE_AUDIO;ENABLE_WWW;ENABLE_SHADOWS;ENABLE_DUCK_TYPING;UNITY_4_1_0;UNITY_4_1;ENABLE_PROFILER;UNITY_EDITOR</DefineConstants>
 	<ErrorReport>prompt</ErrorReport>
 	<WarningLevel>4</WarningLevel>
 	<NoWarn>0169</NoWarn>
@@ -44,18 +44,15 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Cloud System Demos\Scripts\Camera\CameraButtons.cs" />
-     <Compile Include="Assets\Cloud System Demos\Scripts\Camera\CameraFlyer.cs" />
-     <Compile Include="Assets\Cloud System Demos\Scripts\Camera\CameraRotator.cs" />
-     <Compile Include="Assets\Cloud System Demos\Scripts\Camera\CameraSwitcher.cs" />
-     <Compile Include="Assets\Cloud System Demos\Scripts\DestroyOnFinish.cs" />
-     <Compile Include="Assets\Cloud System Demos\Scripts\Effects\ChangeTint.cs" />
-     <Compile Include="Assets\Cloud System Demos\Scripts\Effects\GoodEvil.cs" />
-     <Compile Include="Assets\Cloud System Demos\Scripts\Effects\MoveShadingGroupCenter.cs" />
-     <Compile Include="Assets\Cloud System Demos\Scripts\Effects\Rotate.cs" />
-     <Compile Include="Assets\Cloud System Demos\Scripts\LightningCreator.cs" />
-     <Compile Include="Assets\Cloud System Demos\Scripts\ShowFPS.cs" />
-     <Compile Include="Assets\Cloud System Demos\Scripts\SoundPlayer.cs" />
+     <Compile Include="Assets\Scripts\BackgroundAlpha.cs" />
+     <Compile Include="Assets\Scripts\CloudShadow.cs" />
+     <Compile Include="Assets\Scripts\LinkCollider.cs" />
+     <Compile Include="Assets\Scripts\LinkLightSun.cs" />
+     <Compile Include="Assets\Scripts\SunBeam.cs" />
+     <Compile Include="Assets\Scripts\SunLook.cs" />
+     <None Include="Assets\Standard Assets\Projectors\Guidelines.txt" />
+     <None Include="Assets\Shaders\Fx\Rain.shader" />
+     <None Include="Assets\Standard Assets\Projectors\Sources\Shaders\Projector Multiply.shader" />
      <None Include="Assets\Shaders\Fx\Additive.shader" />
      <None Include="Assets\Plugins\Cloud System\Resources\Shaders\MobileLightningCloudShader.shader" />
      <None Include="Assets\Plugins\Cloud System\Resources\Shaders\MobileCloudLightingModel.cginc" />
@@ -63,6 +60,7 @@
      <None Include="Assets\Plugins\Cloud System\Resources\Shaders\LightningCloudShader.shader" />
      <None Include="Assets\Plugins\Cloud System\Resources\Shaders\CloudLightingModel.cginc" />
      <None Include="Assets\Plugins\Cloud System\Resources\Shaders\CloudShader.shader" />
+     <None Include="Assets\Standard Assets\Projectors\Sources\Shaders\Projector Light.shader" />
      <None Include="Assets\Plugins\Cloud System\Release Notes.txt" />
      <None Include="Assets\Plugins\Cloud System\Resources\Shaders\SoftCloudShader.shader" />
      <None Include="Assets\Plugins\Cloud System\Readme.txt" />

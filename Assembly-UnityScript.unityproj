@@ -45,15 +45,9 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Deer\Scripts\deerAnimation.js" />
-     <Compile Include="Assets\Scripts\BackgroundScript.js" />
      <Compile Include="Assets\Scripts\CloudScript.js" />
-     <Compile Include="Assets\Scripts\CloudShadowScript.js" />
-     <Compile Include="Assets\Scripts\ColliderScript.js" />
-     <Compile Include="Assets\Scripts\GameManagerScript.js" />
-     <Compile Include="Assets\Scripts\LightSunScript.js" />
-     <Compile Include="Assets\Scripts\SunBeamScript.js" />
-     <Compile Include="Assets\Scripts\SunLookScript.js" />
      <Compile Include="Assets\Scripts\SunScript.js" />
+     <Compile Include="Assets\Scripts\gameManagerScript.js" />
      <None Include="Assets\Standard Assets\Projectors\Guidelines.txt" />
      <None Include="Assets\Shaders\Fx\Rain.shader" />
      <None Include="Assets\Standard Assets\Projectors\Sources\Shaders\Projector Multiply.shader" />
