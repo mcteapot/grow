@@ -27,8 +27,8 @@ public class GameManager : MonoBehaviour {
 	void checkCloundActive () {
 		for(int i = 0; i < cloudActive.Count; i++) {
 			Transform activeClound = cloudActive[i] as Transform;
-				CloudManager cloundScript;
-				cloundScript = activeClound.GetComponent<CloudManager>();
+				CloudController cloundScript;
+				cloundScript = activeClound.GetComponent<CloudController>();
 			if(cloundScript.getIsActive()) {
 				cloudShadow.position = new Vector3(activeClound.position.x + shadowCorrection, activeClound.position.y, activeClound.position.z);
 				if(cloundScript.getCloundTintAOn() <= 0.06) {
