@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour {
 	
 	public float shadowCorrection;
 	
-	Transform[] cloudPrefabs = new Transform[3];
+	public Transform[] cloudPrefabs = new Transform[3];
 	
 	public Transform cloudShadow;
 	
@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 	
-		//cloudActive = createCloundsStart();
+		cloudActive = createCloundsStart();
 	}
 	
 	// Update is called once per frame
