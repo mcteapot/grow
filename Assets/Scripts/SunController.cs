@@ -39,22 +39,16 @@ public class SunController : MonoBehaviour {
 	}
 	
 	void OnMouseDown () {
-		if(isActive) {
-			screenPos = cam.WorldToScreenPoint(transform.position);
-	    	offset = transform.position - cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPos.z));
-		} 	
+		isActive = true;
+		isSetY = false;
+		beamActive(true);
+	    moveDown();
+
 	}
 	
 	
 	void OnMouseDrag () {
-		if(isActive) {
-			Vector3 curScreenPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPos.z);
-	
-			Vector3 curPos = cam.ScreenToWorldPoint(curScreenPos) + offset;
-			curPos.z = positionZ;
-			//Debug.Log("currentPOS: " + curPos);
-			transform.position = curPos;
-		}
+		moveDrag();
 	}
 	
 	void OnMouseUp () {
