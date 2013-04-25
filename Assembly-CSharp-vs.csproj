@@ -51,6 +51,7 @@
      <Compile Include="Assets\Scripts\LinkCollider.cs" />
      <Compile Include="Assets\Scripts\LinkLightSun.cs" />
      <Compile Include="Assets\Scripts\SunBeam.cs" />
+     <Compile Include="Assets\Scripts\SunController.cs" />
      <Compile Include="Assets\Scripts\SunLook.cs" />
      <None Include="Assets\Standard Assets\Projectors\Guidelines.txt" />
      <None Include="Assets\Shaders\Fx\Rain.shader" />
