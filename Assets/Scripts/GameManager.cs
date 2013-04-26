@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour {
 	
 	public int startCloundNum;
 	
+	public float cloundBoundX = 38.0F;
+	
 	// Use this for initialization
 	void Start () {
 	
@@ -22,6 +24,7 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		checkCloundActive();
+		checkCloundBound();
 	}
 	
 	void checkCloundActive () {
@@ -55,6 +58,17 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 	
+	void checkCloundBound () {
+		for(int i = 0; i < cloudActive.Count; i++) {
+			Transform activeClound = cloudActive[i] as Transform;
+			if(activeClound.position.x > cloundBoundX) {
+				Destroy(activeClound.gameObject);
+				cloudActive.RemoveAt(i);
+				cloudActive.Add(createCloud());
+				break;
+			}
+		}
+	}
 	Transform createCloud () {
 		Debug.Log("NEW CLOUD BITCHES");
 		int numMax = cloudPrefabs.Length - 1;
@@ -77,7 +91,7 @@ public class GameManager : MonoBehaviour {
 
 			clouds.Add(cloud);
 		}
-		//print(clouds.length);
+		//Debug.Log(clouds.length);
 		return clouds;
 	}
 	
@@ -91,8 +105,8 @@ public class GameManager : MonoBehaviour {
 		} else {
 			return new Vector3(0, 0, 0);
 		}
-		//print(firstNum);
-		//print(secondNum);
+		//Debug.Log(firstNum);
+		//Debug.Log(secondNum);
 		Vector3 aVector = new Vector3(Random.Range((0.5F + firstNum), (3.4F + secondNum)), Random.Range(10.5F, 13.1F), Random.Range(21.5F, 23.2F));
 		return aVector;
 		

@@ -43,6 +43,7 @@ public class SunController : MonoBehaviour {
 		isSetY = false;
 		beamActive(true);
 	    moveDown();
+		audio.Play();
 
 	}
 	
@@ -55,6 +56,7 @@ public class SunController : MonoBehaviour {
 		if(isActive) {
 			beamActive(false);
 			isActive = false;
+			audio.Stop();
 		}
 	
 	}

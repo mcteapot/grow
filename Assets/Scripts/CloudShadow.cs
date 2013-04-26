@@ -58,7 +58,22 @@ public class CloudShadow : MonoBehaviour {
 		if(!isActive){
 			//animateShadow();
 			transform.position = new Vector3(0, 0, 0);
+			if(audio.isPlaying) {
+				audio.volume = 0.0F;
+				audio.Pause();
+			}
+		}
+		if(newActive && !audio.isPlaying) {
+			audio.Play();
+			audio.volume = 1.0F;
 		}
 	}
+	
+    void OnDestroy() {
+		if(audio.isPlaying) {
+			audio.volume = 0.0F;
+			audio.Pause();
+		}
+    }
 
 }
