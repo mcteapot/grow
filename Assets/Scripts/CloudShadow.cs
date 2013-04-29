@@ -6,6 +6,7 @@ public class CloudShadow : MonoBehaviour {
 	public Transform target;
 	public Transform darkRay;
 	public Projector darkProj;
+	public Transform rainParticle;
 	
 	public bool isActive;
 	
@@ -44,11 +45,15 @@ public class CloudShadow : MonoBehaviour {
 	
 	void animateShadow () {
 		float aVelocity = 0.0F;
+		float pVelocity = 0.0F;
 		if(isActive) {
 			darkProj.farClipPlane = Mathf.SmoothDamp(darkProj.farClipPlane, 50.0F, ref aVelocity, 0.4F);
+			rainParticle.particleSystem.emissionRate = Mathf.SmoothDamp(rainParticle.particleSystem.emissionRate, 150.0F, ref pVelocity, 0.4F);
+			Debug.Log("EMIT" + rainParticle.particleSystem.emissionRate);
 	
 		} else {
 			darkProj.farClipPlane = Mathf.SmoothDamp(darkProj.farClipPlane, 0.01F, ref aVelocity, 0.2F);
+			rainParticle.particleSystem.emissionRate = 0.0F;
 	
 		}
 	}
