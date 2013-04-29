@@ -113,7 +113,7 @@ public class GameManager : MonoBehaviour {
 	}
 	
 	Vector3 getRandomSpawnPosition () {
-		Vector3 aVector = new Vector3(Random.Range(-45.1F, -9.1F), Random.Range(10.5F, 13.1F), Random.Range(21.5F, 23.2F));
+		Vector3 aVector = new Vector3(Random.Range(-25.1F, -9.1F), Random.Range(10.5F, 13.1F), Random.Range(21.5F, 23.2F));
 		return aVector;
 	}
 }
