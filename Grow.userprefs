@@ -1,8 +1,13 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="../../Learning/UnityShurikenExamples/Assets/Shaders/Particle Add.shader">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/FlowerMotion.cs">
     <Files>
       <File FileName="../../Learning/UnityShurikenExamples/Assets/Shaders/Particle Add.shader" Line="1" Column="1" />
+      <File FileName="Assets/Shaders/DoubleSided_IF/TreeCreatorLeavesFast.shader" Line="1" Column="1" />
+      <File FileName="Assets/Shaders/DoubleSided_IF/Tree.cginc" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/CloudShadow.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GameManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/FlowerMotion.cs" Line="48" Column="45" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
