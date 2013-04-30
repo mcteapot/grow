@@ -56,11 +56,14 @@
      <None Include="Assets\Standard Assets\Projectors\Guidelines.txt" />
      <None Include="Assets\Shaders\Fx\Rain.shader" />
      <None Include="Assets\Standard Assets\Projectors\Sources\Shaders\Projector Multiply.shader" />
+     <None Include="Assets\Shaders\DoubleSided_IF\TreeCreatorLeavesFast.shader" />
      <None Include="Assets\Shaders\Fx\Additive.shader" />
      <None Include="Assets\Plugins\Cloud System\Resources\Shaders\MobileLightningCloudShader.shader" />
      <None Include="Assets\Plugins\Cloud System\Resources\Shaders\MobileCloudLightingModel.cginc" />
+     <None Include="Assets\Shaders\DoubleSided_IF\Tree.cginc" />
      <None Include="Assets\Plugins\Cloud System\CloudSystemFree.Runtime.xml" />
      <None Include="Assets\Plugins\Cloud System\Resources\Shaders\LightningCloudShader.shader" />
+     <None Include="Assets\Shaders\DoubleSided_IF\TreeVertexLit.cginc" />
      <None Include="Assets\Plugins\Cloud System\Resources\Shaders\CloudLightingModel.cginc" />
      <None Include="Assets\Plugins\Cloud System\Resources\Shaders\CloudShader.shader" />
      <None Include="Assets\Standard Assets\Projectors\Sources\Shaders\Projector Light.shader" />
