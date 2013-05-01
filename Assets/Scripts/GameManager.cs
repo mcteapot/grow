@@ -15,6 +15,9 @@ public class GameManager : MonoBehaviour {
 	
 	public float cloundBoundX = 38.0F;
 	
+	public float lightningRate = 1.5F;
+	private float nextLighting = 0.0F;
+	
 	// Use this for initialization
 	void Start () {
 	
@@ -32,13 +35,19 @@ public class GameManager : MonoBehaviour {
 			Transform activeClound = cloudActive[i] as Transform;
 				CloudController cloundScript;
 				cloundScript = activeClound.GetComponent<CloudController>();
+			
 			if(cloundScript.getIsActive()) {
 				cloudShadow.position = new Vector3(activeClound.position.x + shadowCorrection, activeClound.position.y, activeClound.position.z);
+				if(Input.GetMouseButtonDown(1)) {
+					nextLighting = Time.time + lightningRate;
+					cloudShadow.SendMessage("setLightning", true);
+					cloundScript.lightningFire();
+				}
 				if(cloundScript.getCloundTintAOn() <= 0.06) {
 					cloudShadow.SendMessage("setActive", false);
 					
 					Debug.Log("cloud destoryed");
-					
+					cloudShadow.SendMessage("setLightning", false);
 					Destroy(activeClound.gameObject);
 					cloudActive.RemoveAt(i);
 					cloudActive.Add(createCloud());
@@ -47,6 +56,11 @@ public class GameManager : MonoBehaviour {
 					cloudShadow.SendMessage("setActive", true);
 					//shadowScript.setActive(true);
 				}
+				//if(Time.time > nextLighting) {
+				//	nextLighting = Time.time + lightningRate;
+				//	cloudShadow.SendMessage("setLightning", false);	
+				//}
+				//cloudShadow.SendMessage("setLightning", false);
 				break;
 			}
 	
@@ -113,7 +127,7 @@ public class GameManager : MonoBehaviour {
 	}
 	
 	Vector3 getRandomSpawnPosition () {
-		Vector3 aVector = new Vector3(Random.Range(-25.1F, -9.1F), Random.Range(10.5F, 13.1F), Random.Range(21.5F, 23.2F));
+		Vector3 aVector = new Vector3(Random.Range(-45.1F, -9.1F), Random.Range(10.5F, 13.1F), Random.Range(21.5F, 23.2F));
 		return aVector;
 	}
 }

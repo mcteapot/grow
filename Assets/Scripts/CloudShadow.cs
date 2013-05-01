@@ -10,7 +10,10 @@ public class CloudShadow : MonoBehaviour {
 	
 	public bool isActive;
 	
+	public Transform lightningSky;
+	
 	private Quaternion startRotation;
+	
 	
 	// Use this for initialization
 	void Start () {
@@ -49,7 +52,7 @@ public class CloudShadow : MonoBehaviour {
 		if(isActive) {
 			darkProj.farClipPlane = Mathf.SmoothDamp(darkProj.farClipPlane, 50.0F, ref aVelocity, 0.4F);
 			rainParticle.particleSystem.emissionRate = Mathf.SmoothDamp(rainParticle.particleSystem.emissionRate, 150.0F, ref pVelocity, 0.4F);
-			Debug.Log("EMIT" + rainParticle.particleSystem.emissionRate);
+			//Debug.Log("EMIT" + rainParticle.particleSystem.emissionRate);
 	
 		} else {
 			darkProj.farClipPlane = Mathf.SmoothDamp(darkProj.farClipPlane, 0.01F, ref aVelocity, 0.2F);
@@ -71,6 +74,13 @@ public class CloudShadow : MonoBehaviour {
 		if(newActive && !audio.isPlaying) {
 			audio.Play();
 			audio.volume = 1.0F;
+		}
+	}
+	
+	void setLightning (bool newLight) {
+		lightningSky.SendMessage("setIsLightningEnabled", newLight);
+		if(!lightningSky.audio.isPlaying && newLight) {
+			lightningSky.audio.Play();
 		}
 	}
 	

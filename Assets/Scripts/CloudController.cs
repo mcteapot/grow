@@ -18,6 +18,8 @@ public class CloudController : MonoBehaviour {
 	private float cloudFadingOn;
 	private float cloundTintAOn;
 	
+	private bool isLightning = false;
+	
 	private CS_Cloud cloudScript;
 	
 	public Camera cam;
@@ -43,6 +45,12 @@ public class CloudController : MonoBehaviour {
 	
 	public float getCloundTintAOn () {
 		return cloundTintAOn;
+	}
+	
+	public void lightningFire () {
+		cloundLifeRate = 1.5F;
+		isLightning = true;
+		transform.GetChild(0).animation.Play("cloud_light_on_anim", PlayMode.StopAll);
 	}
 	
 	// Use this for initialization
@@ -82,7 +90,7 @@ public class CloudController : MonoBehaviour {
 	}
 	
 	void OnMouseUp () {
-		if(isActive) {
+		if(isActive && !isLightning) {
 			isActive = false;
 			isBounding = false;
 			cloudOff();
@@ -157,7 +165,7 @@ public class CloudController : MonoBehaviour {
 			//Debug.Log("aVelocity" + aVelocity);
 			//cloudScript.Tint.a = Mathf.SmoothDamp(cloudScript.Tint.a, cloundTintAOn, aVelocity, 0.2);
 			//Debug.Log("aVelocity" + aVelocity);
-		} else if(!animation.isPlaying && isActive) {
+		} else if((!animation.isPlaying && isActive) || isLightning) {
 			// not animating and active
 			//Debug.Log("FUCK YO SHIT" + cloudScript.Tint.a);
 			

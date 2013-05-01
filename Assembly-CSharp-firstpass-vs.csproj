@@ -63,6 +63,10 @@
      <Compile Include="Assets\Plugins\Cloud System\Scripts\Renderer\UnityParticleSystem\CS_UnityParticleSystemTintRenderer.cs" />
      <Compile Include="Assets\Plugins\Cloud System\Scripts\Renderer\UnityParticleSystem\CS_UnityParticleSystemVerticalColorRenderer.cs" />
      <Compile Include="Assets\Plugins\Cloud System\Scripts\Renderer\UnityParticleSystem\CS_UnityParticleSystemVerticalColorWithShadingGroupRenderer.cs" />
+     <Compile Include="Assets\Standard Assets\Lightning\LightningDeformer.cs" />
+     <Compile Include="Assets\Standard Assets\Lightning\LightningFromSkyEnabler.cs" />
+     <Compile Include="Assets\Standard Assets\Lightning\LightningLightController.cs" />
+     <Compile Include="Assets\Standard Assets\Lightning\LightningParameterController.cs" />
      <None Include="Assets\Standard Assets\Projectors\Guidelines.txt" />
      <None Include="Assets\Shaders\Fx\Rain.shader" />
      <None Include="Assets\Standard Assets\Projectors\Sources\Shaders\Projector Multiply.shader" />

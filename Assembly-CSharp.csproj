@@ -54,6 +54,7 @@
      <Compile Include="Assets\Scripts\SunBeam.cs" />
      <Compile Include="Assets\Scripts\SunController.cs" />
      <Compile Include="Assets\Scripts\SunLook.cs" />
+     <Compile Include="Assets\Source\CameraSelector.cs" />
      <None Include="Assets\Standard Assets\Projectors\Guidelines.txt" />
      <None Include="Assets\Shaders\Fx\Rain.shader" />
      <None Include="Assets\Standard Assets\Projectors\Sources\Shaders\Projector Multiply.shader" />
