@@ -95,10 +95,10 @@ public class LightningDeformer : MonoBehaviour
 		sinusZOffset = Random.Range(0.0f, 6.5f);
 		sinusSpeed = Random.Range(0.5f, 1.5f);
 		
-		if (isEnabled)
-		{
-			audio.Play();
-		}
+		//if (isEnabled)
+		//{
+			//audio.Play();
+		//}
 		
 	}
 
@@ -123,8 +123,8 @@ public class LightningDeformer : MonoBehaviour
 				
 				timerEnd = Random.Range(invisibleTimeLowerLimit, invisibleTimeUpperLimit);
 				
-				if (stopSoundOnDisappear)
-					audio.Stop();
+				//if (stopSoundOnDisappear)
+					//audio.Stop();
 			}
 			else
 			{
@@ -140,8 +140,8 @@ public class LightningDeformer : MonoBehaviour
 				
 				timerEnd = Random.Range(lifetimeLowerLimit, lifetimeUpperLimit);
 				
-				audio.Stop();
-				audio.Play();
+				//audio.Stop();
+				//audio.Play();
 			}
 		}
 		

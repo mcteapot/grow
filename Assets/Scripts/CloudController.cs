@@ -48,7 +48,7 @@ public class CloudController : MonoBehaviour {
 	}
 	
 	public void lightningFire () {
-		cloundLifeRate = 1.5F;
+		cloundLifeRate = 2.5F;
 		isLightning = true;
 		transform.GetChild(0).animation.Play("cloud_light_on_anim", PlayMode.StopAll);
 	}
