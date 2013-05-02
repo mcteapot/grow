@@ -36,6 +36,7 @@
 'Assets/Scripts/FlowerController.cs'
 'Assets/Scripts/FlowerMotion.cs'
 'Assets/Scripts/GameManager.cs'
+'Assets/Scripts/HealthBar.cs'
 'Assets/Scripts/LinkCollider.cs'
 'Assets/Scripts/LinkLightSun.cs'
 'Assets/Scripts/SunBeam.cs'

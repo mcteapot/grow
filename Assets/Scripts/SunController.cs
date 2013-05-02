@@ -24,6 +24,10 @@ public class SunController : MonoBehaviour {
 	public float boundRight;
 	public float boundLeft;
 	public float correction;
+	
+	public bool getIsActive() {
+		return isActive;
+	}
 
 	// Use this for initialization
 	void Start () {

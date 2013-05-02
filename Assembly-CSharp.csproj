@@ -50,6 +50,7 @@
      <Compile Include="Assets\Scripts\FlowerController.cs" />
      <Compile Include="Assets\Scripts\FlowerMotion.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
+     <Compile Include="Assets\Scripts\HealthBar.cs" />
      <Compile Include="Assets\Scripts\LinkCollider.cs" />
      <Compile Include="Assets\Scripts\LinkLightSun.cs" />
      <Compile Include="Assets\Scripts\SunBeam.cs" />

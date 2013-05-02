@@ -11,10 +11,13 @@ public class FlowerController : MonoBehaviour {
 
 	public FlowerLevels flowerLevel = FlowerLevels.levelOne;
 
-	public float sunLevelOne = 100.0F;
-	public float sunLevelTwo = 50.0F;
-	public float waterLevelOne = 100.0F;
-	public float waterLevelTwo = 50.0F;
+	public float sunLevelMaxOne = 100.0F;
+	public float sunLevelMaxTwo = 150.0F;
+	public float waterLevelMaxOne = 100.0F;
+	public float waterLevelMaxTwo = 150.0F;
+	
+	public float startSunLevel = 50.0F;
+	public float startWaterLevel = 50.0F;
 	
 	private float sunLevel;
 	private float waterLevel;
@@ -23,6 +26,10 @@ public class FlowerController : MonoBehaviour {
 	private Transform flowerLarge;
 
 	private Transform flowerLevelUp;
+	
+	private Transform lifeBar;
+	
+	private ParticleSystem growParticle; 
 
 	public bool debugText = false;
 
@@ -32,18 +39,29 @@ public class FlowerController : MonoBehaviour {
 	
 	void Awake () {
 
-		sunLevel = sunLevelOne;
-		waterLevel = waterLevelOne;
+		resetLevels();
 
 		for( int i=0;i<transform.childCount;i++) {
-			if(transform.GetChild(i).name=="Flower S") {
-				flowerSmall=transform.GetChild(i);
-			}
-			if(transform.GetChild(i).name=="Flower L") {
-				flowerLarge=transform.GetChild(i);
-			}
-			if(transform.GetChild(i).name=="Flower Level") {
-				flowerLevelUp=transform.GetChild(i);
+			switch(transform.GetChild(i).name) {
+				case "Flower S":
+					flowerSmall = transform.GetChild(i);
+					break;
+				case "Flower L":
+					flowerLarge = transform.GetChild(i);
+					break;
+				case "Flower Level":
+					flowerLevelUp = transform.GetChild(i);
+					break;
+				case "Growl Particle System":
+					Transform tmp;
+					tmp = transform.GetChild(i);
+					growParticle = tmp.particleSystem;
+					break;
+				case "Life Bar":
+					lifeBar = transform.GetChild(i);
+					break;
+				default:
+					break;
 			}
 		}
 	}
@@ -52,23 +70,35 @@ public class FlowerController : MonoBehaviour {
 	void Start () {
 		// Sets a random rotation
 		transform.rotation = Quaternion.Euler(0, Random.Range(-20.0F, 20.0F), 0);
+		growParticle.enableEmission = false;
 	
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(debugText) {
+		if(sunLevel >= sunLevelMaxOne && waterLevel >= waterLevelMaxOne) {
 			levelUp();
 		} else {
 			levelDown();
 		}
+		setPrecent();
 	}
-
+	
+	void OnTriggerStay(Collider otherObject) {
+		Debug.Log("TRIGGER");
+		if(otherObject.tag == "cloud") {
+			Debug.Log ("CLOUND COLLIDE");
+			
+		}
+		if(otherObject.tag == "sun") {
+			Debug.Log("SUN COLLIDE");
+		}
+	}
+	
 	void levelUp () {
 		if(flowerLevel == FlowerLevels.levelOne) {
 			flowerLevel = FlowerLevels.levelTwo;
-			sunLevel = sunLevelTwo;
-			waterLevel = waterLevelTwo;
+			
 			flowerSmall.animation.Play("flower_off");
 			
 			flowerLevelUp.gameObject.SetActive(true);
@@ -78,7 +108,8 @@ public class FlowerController : MonoBehaviour {
 			flowerLarge.animation.Play();
 
 			StartCoroutine( hideObject(1.0F, flowerSmall) );
-
+			
+			levelParticle(true);
 
 		}
 	}
@@ -86,8 +117,7 @@ public class FlowerController : MonoBehaviour {
 	void levelDown () {
 		if(flowerLevel == FlowerLevels.levelTwo) {
 			flowerLevel = FlowerLevels.levelOne;
-			sunLevel = sunLevelOne;
-			waterLevel = waterLevelOne;
+			
 			flowerLarge.animation.Play("flower_off");
 			
 			flowerLevelUp.gameObject.SetActive(false);
@@ -96,9 +126,32 @@ public class FlowerController : MonoBehaviour {
 			flowerSmall.animation.Play();
 
 			StartCoroutine( hideObject(1.0F, flowerLarge) );
+			
+			levelParticle(false);
 
 
 		}
+	}
+	
+	void setPrecent () {
+		if(flowerLevel == FlowerLevels.levelOne) {
+			lifeBar.SendMessage("setWaterPrecentage", waterLevel / waterLevelMaxOne);
+			lifeBar.SendMessage("setLightPrecentage", sunLevel / sunLevelMaxOne);
+		}
+		if(flowerLevel == FlowerLevels.levelTwo) {
+			lifeBar.SendMessage("setWaterPrecentage", waterLevel / waterLevelMaxTwo);
+			lifeBar.SendMessage("setLightPrecentage", sunLevel / sunLevelMaxTwo);
+		}
+	}
+	
+
+	void levelParticle (bool newState) {
+		growParticle.enableEmission = newState;
+	}
+	
+	void resetLevels() {
+		sunLevel = startSunLevel;
+		waterLevel = startWaterLevel;
 	}
 
 	IEnumerator hideObject (float waitTime, Transform hidObj) {

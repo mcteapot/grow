@@ -12,11 +12,11 @@ public class FlowerMotion : MonoBehaviour {
 	public float xRangeMax = 1.0F;
 	public float xRangeMin = 1.0F;
 	
-	private float yStartRot;
+	private float yStartRot = 0.0F;
 	private float yRotMax;
 	private float yRotMin;
 	
-	private float xStartRot;
+	private float xStartRot = 0.0F;
 	private float xRotMax;
 	private float xRotMin;
 

@@ -105,7 +105,7 @@ public class CloudController : MonoBehaviour {
 	}
 	
 	void moveDrag () {
-		if(isActive) {
+		if(isActive && !isLightning) {
 			Vector3 curScreenPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPos.z);
 	
 			Vector3 curPos = cam.ScreenToWorldPoint(curScreenPos) + offset;

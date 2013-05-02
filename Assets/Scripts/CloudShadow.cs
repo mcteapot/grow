@@ -8,11 +8,15 @@ public class CloudShadow : MonoBehaviour {
 	public Projector darkProj;
 	public Transform rainParticle;
 	
-	public bool isActive;
+	private bool isActive;
 	
 	public Transform lightningSky;
 	
 	private Quaternion startRotation;
+	
+	public bool getIsActive() {
+		return isActive;
+	}
 	
 	
 	// Use this for initialization
