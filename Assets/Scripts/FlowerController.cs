@@ -132,7 +132,7 @@ public class FlowerController : MonoBehaviour {
 	
 	void OnTriggerExit(Collider otherObject) {
 		levelIncrease = false;
-		Debug.Log("ELVIS HAS LEFT THE BUILDING");
+		//Debug.Log("ELVIS HAS LEFT THE BUILDING");
 		StartCoroutine( decreseLevelCheck(decreaseLevelTime) );
 	}
 	
@@ -185,7 +185,7 @@ public class FlowerController : MonoBehaviour {
 				sunLevel = Mathf.Clamp(tmpSunLevel, 0.0F, tmpSunLevel);
 			}
 			
-			Debug.Log("LEVEL IS DECREASING");
+			//Debug.Log("LEVEL IS DECREASING");
 		}
 	}
 	
@@ -268,7 +268,7 @@ public class FlowerController : MonoBehaviour {
 
 	IEnumerator hideObject (float waitTime, Transform hidObj) {
 		yield return new WaitForSeconds(waitTime);
-		Debug.Log("HIDOBJECT: " + hidObj.name);
+		//Debug.Log("HIDOBJECT: " + hidObj.name);
 		hidObj.gameObject.SetActive(false);
 	}
 	
@@ -276,7 +276,7 @@ public class FlowerController : MonoBehaviour {
 		yield return new WaitForSeconds(waitTime);
 		if(!levelIncrease) {
 			levelDecrease = true;
-			Debug.Log("LevelDecrease: " + levelDecrease);
+			//Debug.Log("LevelDecrease: " + levelDecrease);
 		}
 	}
 	

@@ -8,6 +8,10 @@ public class GameManager : MonoBehaviour {
 	public float shadowCorrection;
 	
 	public Transform[] cloudPrefabs = new Transform[3];
+	public int maxClounds = 7;
+	
+	public float nextCloundIncrement = 0.5F;
+	private float nextCloundTime = 0.0F;
 	
 	public Transform cloudShadow;
 	
@@ -18,16 +22,19 @@ public class GameManager : MonoBehaviour {
 	public float lightningRate = 1.5F;
 	private float nextLighting = 0.0F;
 	
+	
 	// Use this for initialization
 	void Start () {
 	
 		cloudActive = createCloundsStart();
+		nextCloundTime = Time.time + nextCloundIncrement;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		checkCloundActive();
 		checkCloundBound();
+		cloudGenerate();
 	}
 	
 	void checkCloundActive () {
@@ -50,7 +57,11 @@ public class GameManager : MonoBehaviour {
 					cloudShadow.SendMessage("setLightning", false);
 					Destroy(activeClound.gameObject);
 					cloudActive.RemoveAt(i);
-					cloudActive.Add(createCloud());
+					
+					if(cloudActive.Count <= maxClounds) {
+						cloudActive.Add(createCloud());
+					}
+					
 					break;
 				} else {
 					cloudShadow.SendMessage("setActive", true);
@@ -83,6 +94,7 @@ public class GameManager : MonoBehaviour {
 			}
 		}
 	}
+	
 	Transform createCloud () {
 		Debug.Log("NEW CLOUD BITCHES");
 		int numMax = cloudPrefabs.Length - 1;
@@ -90,6 +102,19 @@ public class GameManager : MonoBehaviour {
 		Transform cloud =  Instantiate(cloudPrefabs[numb], getRandomSpawnPosition(), cloudPrefabs[numb].rotation) as Transform;
 		
 		return cloud;		
+		
+	}
+	
+	void cloudGenerate () {
+		
+		if(cloudActive.Count <= maxClounds) {
+			if(Time.time > nextCloundTime) {
+				Debug.Log("CREATE generator" + cloudActive.Count);
+				Debug.Log("CREATE FUCKING CLOUD");
+        		nextCloundTime = Time.time + nextCloundIncrement;
+        		cloudActive.Add(createCloud());
+    		}
+		}
 		
 	}
 	
