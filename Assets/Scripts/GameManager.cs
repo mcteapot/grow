@@ -96,7 +96,7 @@ public class GameManager : MonoBehaviour {
 	}
 	
 	Transform createCloud () {
-		Debug.Log("NEW CLOUD BITCHES");
+		//Debug.Log("NEW CLOUD BITCHES");
 		int numMax = cloudPrefabs.Length - 1;
 		int numb = Random.Range(0, 3);
 		Transform cloud =  Instantiate(cloudPrefabs[numb], getRandomSpawnPosition(), cloudPrefabs[numb].rotation) as Transform;
@@ -109,8 +109,8 @@ public class GameManager : MonoBehaviour {
 		
 		if(cloudActive.Count <= maxClounds) {
 			if(Time.time > nextCloundTime) {
-				Debug.Log("CREATE generator" + cloudActive.Count);
-				Debug.Log("CREATE FUCKING CLOUD");
+				//Debug.Log("CREATE generator" + cloudActive.Count);
+				//Debug.Log("CREATE FUCKING CLOUD");
         		nextCloundTime = Time.time + nextCloundIncrement;
         		cloudActive.Add(createCloud());
     		}

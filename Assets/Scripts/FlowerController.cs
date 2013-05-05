@@ -23,7 +23,10 @@ public class FlowerController : MonoBehaviour {
 	public float levelDecreaseOneRate = 10.0F;
 	public float levelDecreaseTwoRate = 10.0F;
 	
-	public float decreaseLevelTime = 10.0F;
+	//public float nextCloundIncrement = 0.5F;
+	//private float nextCloundTime = 0.0F;
+	public float decreaseLevelIncrement = 10.0F;
+	private float nextLevelTime = 0.0F;
 	
 	
 	private float sunLevel;
@@ -82,24 +85,18 @@ public class FlowerController : MonoBehaviour {
 		// Sets a random rotation
 		transform.rotation = Quaternion.Euler(0, Random.Range(-20.0F, 20.0F), 0);
 		growParticle.enableEmission = false;
-		StartCoroutine( decreseLevelCheck(decreaseLevelTime) );
+		//StartCoroutine( decreseLevelCheck(decreaseLevelIncrement) );
+		incrementDownLevelTime();
 	
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(flowerLevel == FlowerLevels.levelOne) {
-			if(sunLevel >= sunLevelMaxOne && waterLevel >= waterLevelMaxOne) {
-				levelUp();
-			}
-		} else if(flowerLevel == FlowerLevels.levelTwo) {
-			if(sunLevel <= 0.0F && waterLevel <= 0.0F) {
-				levelUp();
-			}
-		}
+		checkLevel();
 		setPrecent();
 		levelParticle(levelIncrease);
 		decreaseLevel();
+		downLevelChecker();
 	}
 	
 	void OnTriggerStay(Collider otherObject) {
@@ -132,8 +129,10 @@ public class FlowerController : MonoBehaviour {
 	
 	void OnTriggerExit(Collider otherObject) {
 		levelIncrease = false;
+		
 		//Debug.Log("ELVIS HAS LEFT THE BUILDING");
-		StartCoroutine( decreseLevelCheck(decreaseLevelTime) );
+		//StartCoroutine( decreseLevelCheck(decreaseLevelIncrement) );
+		incrementDownLevelTime();
 	}
 	
 	void levelIncreaseWater () {
@@ -231,6 +230,18 @@ public class FlowerController : MonoBehaviour {
 		}
 	}
 	
+	void checkLevel () {
+		if(flowerLevel == FlowerLevels.levelOne) {
+			if(sunLevel >= sunLevelMaxOne && waterLevel >= waterLevelMaxOne) {
+				levelUp();
+			}
+		} else if(flowerLevel == FlowerLevels.levelTwo) {
+			if(sunLevel <= 0.0F && waterLevel <= 0.0F) {
+				levelDown();
+			}
+		}
+	}
+	
 	void setPrecent () {
 		if(flowerLevel == FlowerLevels.levelOne) {
 			lifeBar.SendMessage("setWaterPrecentage", Mathf.Clamp01(waterLevel / waterLevelMaxOne));
@@ -250,8 +261,8 @@ public class FlowerController : MonoBehaviour {
 	void resetLevels(int level) {
 		switch(level) {
 		case 0:
-			sunLevel = startSunLevel;
-			waterLevel = startWaterLevel;
+			sunLevel = sunLevelMaxOne * 0.5F;
+			waterLevel = sunLevelMaxOne * 0.5F;
 			break;
 		case 1:
 			sunLevel = sunLevelMaxOne - startSunLevel;
@@ -265,7 +276,22 @@ public class FlowerController : MonoBehaviour {
 			break;
 		}
 	}
-
+	
+	void downLevelChecker () {
+		if(Time.time > nextLevelTime) {
+			if(!levelIncrease) {
+				levelDecrease = true;
+				Debug.Log("LevelDecrease: " + levelDecrease + " at" + nextLevelTime);
+			}
+			incrementDownLevelTime();
+		}
+		
+	}
+	
+	void incrementDownLevelTime () {
+		nextLevelTime = Time.time + decreaseLevelIncrement;
+	}
+	
 	IEnumerator hideObject (float waitTime, Transform hidObj) {
 		yield return new WaitForSeconds(waitTime);
 		//Debug.Log("HIDOBJECT: " + hidObj.name);
