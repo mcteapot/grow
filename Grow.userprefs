@@ -1,15 +1,14 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/FlowerController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GameManager.cs">
     <Files>
-      <File FileName="../../Learning/UnityShurikenExamples/Assets/Shaders/Particle Add.shader" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/FlowerController.cs" Line="84" Column="16" />
+      <File FileName="Assets/Scripts/FlowerController.cs" Line="276" Column="34" />
       <File FileName="Assets/Scripts/SunController.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/CloudController.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/GameManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/HealthBar.cs" Line="35" Column="32" />
+      <File FileName="Assets/Scripts/HealthBar.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/FlowerMotion.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/LinkCollider.cs" Line="37" Column="5" />
+      <File FileName="Assets/Scripts/LinkCollider.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/CloudShadow.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
