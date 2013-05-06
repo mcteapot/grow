@@ -3,7 +3,19 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour {
 	
-	public ArrayList cloudActive = new ArrayList();
+	public enum GameStates {
+		gameInit = 0,
+		gameStart = 1,
+		gameActive = 2,
+		gameEnding = 3,
+		gameEnd = 4,
+		gameInActive = 5
+	}
+	
+	public GameStates gameState = GameStates.gameInit;
+	
+	private ArrayList cloudActive = new ArrayList();
+	private ArrayList flowerActive = new ArrayList();
 	
 	public float shadowCorrection;
 	
@@ -22,7 +34,26 @@ public class GameManager : MonoBehaviour {
 	public float lightningRate = 1.5F;
 	private float nextLighting = 0.0F;
 	
+	public Transform cam;
+	public Transform title;
 	
+	//Game Manage functions
+	
+	IEnumerator gameLoader (float waitTime) {
+		gameState = GameStates.gameStart;
+		cam.gameObject.animation.Play();
+		title.gameObject.animation.Play();
+		yield return new WaitForSeconds(waitTime);
+		gameState = GameStates.gameActive;
+	}
+	
+	IEnumerator gameEnder (float waitTime) {
+		gameState = GameStates.gameEnd;
+		cam.gameObject.animation.Play("camera_off");
+		title.gameObject.animation.Play("title_on");
+		yield return new WaitForSeconds(waitTime);
+		gameState = GameStates.gameInActive;
+	}
 	// Use this for initialization
 	void Start () {
 	
@@ -35,6 +66,34 @@ public class GameManager : MonoBehaviour {
 		checkCloundActive();
 		checkCloundBound();
 		cloudGenerate();
+		gameManage();
+	}
+	
+	void gameManage () {
+		if(gameState == GameStates.gameInit){
+			Debug.Log("GAME INIT");
+			StartCoroutine( gameLoader(1.5F) );
+		}else if(gameState == GameStates.gameStart) {
+			//Debug.Log("GAME START");
+		}else if(gameState == GameStates.gameActive) {
+			managePlants();
+		}else if(gameState == GameStates.gameEnding) {
+			//Debug.Log("GAME ENDING");
+			StartCoroutine( gameEnder(1.5F) );
+		}else if(gameState == GameStates.gameEnd) {
+			//Debug.Log("GAME END");
+		}else if(gameState == GameStates.gameInActive) {
+			//Debug.Log("GAME INACTIVE");
+			if(title.gameObject.GetComponent<TitleController>().isActive) {
+				title.gameObject.GetComponent<TitleController>().isActive = false;
+				gameState = GameStates.gameInit;
+				
+			}
+		}
+	}
+	
+	void managePlants() {
+		Debug.Log("MANAGE PLANTS");
 	}
 	
 	void checkCloundActive () {
@@ -155,4 +214,6 @@ public class GameManager : MonoBehaviour {
 		Vector3 aVector = new Vector3(Random.Range(-45.1F, -9.1F), Random.Range(10.5F, 13.1F), Random.Range(21.5F, 23.2F));
 		return aVector;
 	}
+	
+
 }

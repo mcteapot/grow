@@ -132,7 +132,7 @@ public class FlowerController : MonoBehaviour {
 			//Debug.Log ("CLOUND COLLIDE");
 			if(levelIncrease) {
 				levelDecrease = false;
-				Debug.Log("LevelDecrease: " + levelDecrease);
+				//Debug.Log("LevelDecrease: " + levelDecrease);
 				levelIncreaseWater();
 			}
 			
@@ -141,7 +141,7 @@ public class FlowerController : MonoBehaviour {
 			//Debug.Log("SUN COLLIDE");
 			if(levelIncrease) {
 				levelDecrease = false;
-				Debug.Log("LevelDecrease: " + levelDecrease);
+				//Debug.Log("LevelDecrease: " + levelDecrease);
 				levelIncreaseLight();
 			}
 		}
@@ -313,7 +313,7 @@ public class FlowerController : MonoBehaviour {
 		if(Time.time > nextLevelTime) {
 			if(!levelIncrease) {
 				levelDecrease = true;
-				Debug.Log("LevelDecrease: " + levelDecrease + " at" + nextLevelTime);
+				//Debug.Log("LevelDecrease: " + levelDecrease + " at" + nextLevelTime);
 			}
 			incrementDownLevelTime();
 		}
