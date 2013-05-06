@@ -69,7 +69,7 @@ public class FlowerController : MonoBehaviour {
 			return false;
 		}else if(flowerSpawn == 1) {
 			flowerSpawn++;
-			return false;
+			return true;
 		}else {
 			return false;
 		}

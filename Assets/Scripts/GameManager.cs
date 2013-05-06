@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour {
 	public Transform[] cloudPrefabs = new Transform[3];
 	public int maxClounds = 7;
 	
-	public float nextCloundIncrement = 0.5F;
+	public float nextCloundIncrement = 30.5F;
 	private float nextCloundTime = 0.0F;
 	
 	public Transform cloudShadow;
