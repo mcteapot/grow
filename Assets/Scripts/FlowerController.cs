@@ -16,12 +16,16 @@ public class FlowerController : MonoBehaviour {
 	public float waterLevelMaxOne = 100.0F;
 	public float waterLevelMaxTwo = 150.0F;
 	
-	public float startSunLevel = 50.0F;
-	public float startWaterLevel = 50.0F;
+	public float startSunLevel = 25.0F;
+	public float startWaterLevel = 25.0F;
 	
 	public float levelIncreaseRate = 10.0F;
+	
 	public float levelDecreaseOneRate = 10.0F;
 	public float levelDecreaseTwoRate = 10.0F;
+	
+	public float levelDecreaseOneEatineRate = 30.0F;
+	public float levelDecreaseTwoEatinRate = 30.0F;
 	
 	//public float nextCloundIncrement = 0.5F;
 	//private float nextCloundTime = 0.0F;
@@ -34,8 +38,10 @@ public class FlowerController : MonoBehaviour {
 	
 	private bool levelIncrease = false;
 	private bool levelDecrease = false;
-	private bool beingEatan = false;
-
+	public bool beingEatan = false;
+	
+	private int flowerSpawn = 0;
+	// Flower Parts
 	private Transform flowerSmall;
 	private Transform flowerLarge;
 
@@ -50,7 +56,24 @@ public class FlowerController : MonoBehaviour {
 	public int getLevel () {
 		return (int)flowerLevel;
 	}
+	public float getSunLevel () {
+		return sunLevel;
+	}
 	
+	public float getWaterLevel () {
+		return waterLevel;
+	}
+	
+	public bool checkFlowerSpawn () {
+		if(flowerSpawn == 0) {
+			return false;
+		}else if(flowerSpawn == 1) {
+			flowerSpawn++;
+			return false;
+		}else {
+			return false;
+		}
+	} 
 	void Awake () {
 
 		resetLevels(0);
@@ -141,7 +164,7 @@ public class FlowerController : MonoBehaviour {
 		if(flowerLevel == FlowerLevels.levelOne) {
 			float tmpLevel = Mathf.MoveTowards(waterLevel, waterLevelMaxOne, levelIncreaseRate * Time.deltaTime);
 			waterLevel = Mathf.Clamp(tmpLevel, 0.0F, waterLevelMaxOne);
-		} else if(flowerLevel == FlowerLevels.levelTwo) {
+		}else if(flowerLevel == FlowerLevels.levelTwo) {
 			float tmpLevel = Mathf.MoveTowards(waterLevel, waterLevelMaxTwo, levelIncreaseRate * Time.deltaTime);
 			waterLevel = Mathf.Clamp(tmpLevel, 0.0F, waterLevelMaxTwo);
 		}
@@ -152,40 +175,43 @@ public class FlowerController : MonoBehaviour {
 		if(flowerLevel == FlowerLevels.levelOne) {
 			float tmpLevel = Mathf.MoveTowards(sunLevel, sunLevelMaxOne, levelIncreaseRate * Time.deltaTime);
 			sunLevel = Mathf.Clamp(tmpLevel, 0.0F, sunLevelMaxOne);
-		} else if(flowerLevel == FlowerLevels.levelTwo){
+		}else if(flowerLevel == FlowerLevels.levelTwo){
 			float tmpLevel = Mathf.MoveTowards(sunLevel, sunLevelMaxTwo, levelIncreaseRate * Time.deltaTime);
 			sunLevel = Mathf.Clamp(tmpLevel, 0.0F, sunLevelMaxTwo);
 		}
 	}
 	
 	void decreaseLevel () {
-		if(levelDecrease) {
+		if(levelDecrease && !beingEatan) {
 			float tmpWaterMaxLevel = 100.0F;
 			float tmpSunMaxLevel = 100.0F;
 			
 			if(flowerLevel == FlowerLevels.levelOne) {
 				tmpWaterMaxLevel = waterLevelMaxOne;
 				tmpSunMaxLevel = sunLevelMaxOne;
-			
+				
 				float tmpWaterLevel = Mathf.MoveTowards(waterLevel, 0.0F, levelDecreaseOneRate * Time.deltaTime);
 				float tmpSunLevel = Mathf.MoveTowards(sunLevel, 0.0F, levelDecreaseOneRate * Time.deltaTime);
 			
 				waterLevel = Mathf.Clamp(tmpWaterLevel, 0.0F, tmpWaterMaxLevel);
 				sunLevel = Mathf.Clamp(tmpSunLevel, 0.0F, tmpSunLevel);
 			
-			} else if(flowerLevel == FlowerLevels.levelTwo){
+			}else if(flowerLevel == FlowerLevels.levelTwo){
 				tmpWaterMaxLevel = waterLevelMaxTwo;
 				tmpSunMaxLevel = sunLevelMaxTwo;
 
-				float tmpWaterLevel = Mathf.MoveTowards(waterLevel, 0.0F, levelDecreaseOneRate * Time.deltaTime);
-				float tmpSunLevel = Mathf.MoveTowards(sunLevel, 0.0F, levelDecreaseOneRate * Time.deltaTime);
+				float tmpWaterLevel = Mathf.MoveTowards(waterLevel, 0.0F, levelDecreaseTwoRate * Time.deltaTime);
+				float tmpSunLevel = Mathf.MoveTowards(sunLevel, 0.0F, levelDecreaseTwoRate * Time.deltaTime);
 			
 				waterLevel = Mathf.Clamp(tmpWaterLevel, 0.0F, tmpWaterMaxLevel);
 				sunLevel = Mathf.Clamp(tmpSunLevel, 0.0F, tmpSunLevel);
 			}
-			
 			//Debug.Log("LEVEL IS DECREASING");
+		}else if(beingEatan) {
+			Debug.Log("PLANT IS BEING EATING");
 		}
+			
+
 	}
 	
 	void levelUp () {
@@ -235,11 +261,17 @@ public class FlowerController : MonoBehaviour {
 			if(sunLevel >= sunLevelMaxOne && waterLevel >= waterLevelMaxOne) {
 				levelUp();
 			}
-		} else if(flowerLevel == FlowerLevels.levelTwo) {
+		}else if(flowerLevel == FlowerLevels.levelTwo) {
 			if(sunLevel <= 0.0F && waterLevel <= 0.0F) {
+				//level down from two to one
 				levelDown();
+			} else if(sunLevel >= sunLevelMaxOne && waterLevel >= waterLevelMaxOne) { 
+				//checks if new flower hast to spawn
+				if(flowerSpawn > 1) {
+					flowerSpawn++;
+				}
 			}
-		}
+		} 
 	}
 	
 	void setPrecent () {
@@ -261,16 +293,16 @@ public class FlowerController : MonoBehaviour {
 	void resetLevels(int level) {
 		switch(level) {
 		case 0:
-			sunLevel = sunLevelMaxOne * 0.5F;
-			waterLevel = sunLevelMaxOne * 0.5F;
+			sunLevel = (float)(sunLevelMaxOne * 0.5F);
+			waterLevel = (float)(sunLevelMaxOne * 0.5F);
 			break;
 		case 1:
-			sunLevel = sunLevelMaxOne - startSunLevel;
-			waterLevel = waterLevelMaxOne - startWaterLevel;
+			sunLevel = (float)(sunLevelMaxOne - startSunLevel);
+			waterLevel = (float)(waterLevelMaxOne - startWaterLevel);
 			break;
 		case 2:
-			sunLevel = sunLevelMaxOne + startSunLevel;
-			waterLevel = waterLevelMaxOne + startWaterLevel;
+			sunLevel = (float)(sunLevelMaxTwo * 0.25F);
+			waterLevel = (float)(waterLevelMaxTwo * 0.25);
 			break;
 		default:
 			break;
