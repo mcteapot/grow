@@ -40,20 +40,31 @@ public class SunController : MonoBehaviour {
 	void Update () {
 		checkBound();
 		returnPosition(transform.position.y);
+		gameEnding();
+	}
+	
+	void gameEnding () {
+		if(isActive && GameManager.gameState == GameManager.GameStates.gameEnding) {
+			OnMouseUp();
+		}
 	}
 	
 	void OnMouseDown () {
-		isActive = true;
-		isSetY = false;
-		beamActive(true);
-	    moveDown();
-		audio.Play();
+		if(GameManager.gameState == GameManager.GameStates.gameActive) {
+			isActive = true;
+			isSetY = false;
+			beamActive(true);
+		    moveDown();
+			audio.Play();
+		}
 
 	}
 	
 	
 	void OnMouseDrag () {
-		moveDrag();
+		if(GameManager.gameState == GameManager.GameStates.gameActive) {
+			moveDrag();
+		}
 	}
 	
 	void OnMouseUp () {

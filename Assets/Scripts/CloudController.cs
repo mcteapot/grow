@@ -74,19 +74,29 @@ public class CloudController : MonoBehaviour {
 		checkBound();
 		moveCloud();
 		animateClound();
+		gameEnding();
 	}
 	
+	void gameEnding () {
+		if(isActive && GameManager.gameState == GameManager.GameStates.gameEnding) {
+			OnMouseUp();
+		}
+	}
 	
 	void OnMouseDown () {
-		isActive = true;
-		isBounding = true;
-	    moveDown();
-	    cloudOn();
+		if(GameManager.gameState == GameManager.GameStates.gameActive) {
+			isActive = true;
+			isBounding = true;
+		    moveDown();
+		    cloudOn();
+		}
 	}
 	
 	
 	void OnMouseDrag () {
-		moveDrag();
+		if(GameManager.gameState == GameManager.GameStates.gameActive) {
+			moveDrag();
+		}
 	}
 	
 	void OnMouseUp () {

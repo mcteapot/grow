@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour {
 		gameInActive = 5
 	}
 	
-	public GameStates gameState = GameStates.gameInit;
+	public static GameStates gameState = GameStates.gameInActive;
 	
 	private ArrayList cloudActive = new ArrayList();
 	private ArrayList flowerActive = new ArrayList();
@@ -20,7 +20,9 @@ public class GameManager : MonoBehaviour {
 	public float shadowCorrection;
 	
 	public Transform[] cloudPrefabs = new Transform[3];
-	public int maxClounds = 7;
+	public int maxCloudsActive = 7;
+	public int maxCloudsInActive = 3;
+	private int maxClounds = 3;
 	
 	public float nextCloundIncrement = 30.5F;
 	private float nextCloundTime = 0.0F;
@@ -41,19 +43,27 @@ public class GameManager : MonoBehaviour {
 	
 	IEnumerator gameLoader (float waitTime) {
 		gameState = GameStates.gameStart;
+		
 		cam.gameObject.animation.Play();
 		title.gameObject.animation.Play();
+		
 		yield return new WaitForSeconds(waitTime);
+		maxClounds = maxCloudsActive;
 		gameState = GameStates.gameActive;
 	}
 	
 	IEnumerator gameEnder (float waitTime) {
 		gameState = GameStates.gameEnd;
+		
+		maxClounds = maxCloudsInActive;
 		cam.gameObject.animation.Play("camera_off");
 		title.gameObject.animation.Play("title_on");
+		
 		yield return new WaitForSeconds(waitTime);
+		title.gameObject.GetComponent<TitleController>().isActive = false;
 		gameState = GameStates.gameInActive;
 	}
+	
 	// Use this for initialization
 	void Start () {
 	
@@ -77,6 +87,7 @@ public class GameManager : MonoBehaviour {
 			//Debug.Log("GAME START");
 		}else if(gameState == GameStates.gameActive) {
 			managePlants();
+			quitGameKey();
 		}else if(gameState == GameStates.gameEnding) {
 			//Debug.Log("GAME ENDING");
 			StartCoroutine( gameEnder(1.5F) );
@@ -85,7 +96,6 @@ public class GameManager : MonoBehaviour {
 		}else if(gameState == GameStates.gameInActive) {
 			//Debug.Log("GAME INACTIVE");
 			if(title.gameObject.GetComponent<TitleController>().isActive) {
-				title.gameObject.GetComponent<TitleController>().isActive = false;
 				gameState = GameStates.gameInit;
 				
 			}
@@ -213,6 +223,13 @@ public class GameManager : MonoBehaviour {
 	Vector3 getRandomSpawnPosition () {
 		Vector3 aVector = new Vector3(Random.Range(-45.1F, -9.1F), Random.Range(10.5F, 13.1F), Random.Range(21.5F, 23.2F));
 		return aVector;
+	}
+	
+	void quitGameKey () {
+		if(Input.GetKeyDown("q")) {
+			Debug.Log("Game Quit");
+			gameState = GameStates.gameEnding;
+		}
 	}
 	
 
