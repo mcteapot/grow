@@ -5,6 +5,7 @@ using System.Collections;
 public class FlowerController : MonoBehaviour {
 
 	public enum FlowerLevels {
+		levelDead = -1,
 		levelOne = 0,
 		levelTwo = 1
 	}
@@ -73,7 +74,8 @@ public class FlowerController : MonoBehaviour {
 		}else {
 			return false;
 		}
-	} 
+	}
+	
 	void Awake () {
 
 		resetLevels(0);
@@ -115,11 +117,15 @@ public class FlowerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		checkLevel();
-		setPrecent();
-		levelParticle(levelIncrease);
-		decreaseLevel();
-		downLevelChecker();
+		if(flowerLevel != FlowerLevels.levelDead) {
+			checkLevel();
+			setPrecent();
+			levelParticle(levelIncrease);
+			decreaseLevel();
+			downLevelChecker();
+		}else if(flowerLevel == FlowerLevels.levelDead) {
+			
+		}
 	}
 	
 	void OnTriggerStay(Collider otherObject) {
@@ -260,6 +266,9 @@ public class FlowerController : MonoBehaviour {
 		if(flowerLevel == FlowerLevels.levelOne) {
 			if(sunLevel >= sunLevelMaxOne && waterLevel >= waterLevelMaxOne) {
 				levelUp();
+			} else if (sunLevel <= 0.0F && waterLevel <= 0.0F) {
+				flowerLevel = FlowerLevels.levelDead;
+				
 			}
 		}else if(flowerLevel == FlowerLevels.levelTwo) {
 			if(sunLevel <= 0.0F && waterLevel <= 0.0F) {
@@ -337,6 +346,13 @@ public class FlowerController : MonoBehaviour {
 			//Debug.Log("LevelDecrease: " + levelDecrease);
 		}
 	}
+	
+	IEnumerator flowerDestory () {
+		flowerSmall.animation.Play("flower_off");
+		yield return new WaitForSeconds(0.5F);
+		//Destroy(gameObject);
+	}
+	
 	
 	
 

@@ -36,6 +36,8 @@ public class GameManager : MonoBehaviour {
 	public float lightningRate = 1.5F;
 	private float nextLighting = 0.0F;
 	
+	public int maxFlowers = 7;
+	
 	public Transform cam;
 	public Transform title;
 	
@@ -48,6 +50,7 @@ public class GameManager : MonoBehaviour {
 		title.gameObject.animation.Play();
 		
 		yield return new WaitForSeconds(waitTime);
+		nextCloundTime = Time.time + nextCloundIncrement;
 		maxClounds = maxCloudsActive;
 		gameState = GameStates.gameActive;
 	}
@@ -63,19 +66,18 @@ public class GameManager : MonoBehaviour {
 		title.gameObject.GetComponent<TitleController>().isActive = false;
 		gameState = GameStates.gameInActive;
 	}
-	
+	void Awake () {
+		cloudActive = createCloundsStart();	
+	}
 	// Use this for initialization
 	void Start () {
 	
-		cloudActive = createCloundsStart();
-		nextCloundTime = Time.time + nextCloundIncrement;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		checkCloundActive();
 		checkCloundBound();
-		cloudGenerate();
 		gameManage();
 	}
 	
@@ -86,7 +88,8 @@ public class GameManager : MonoBehaviour {
 		}else if(gameState == GameStates.gameStart) {
 			//Debug.Log("GAME START");
 		}else if(gameState == GameStates.gameActive) {
-			managePlants();
+			cloudGenerate();
+			checkPlantActive();
 			quitGameKey();
 		}else if(gameState == GameStates.gameEnding) {
 			//Debug.Log("GAME ENDING");
@@ -102,8 +105,8 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 	
-	void managePlants() {
-		Debug.Log("MANAGE PLANTS");
+	void checkPlantActive() {
+		//Debug.Log("MANAGE PLANTS");
 	}
 	
 	void checkCloundActive () {
@@ -168,7 +171,7 @@ public class GameManager : MonoBehaviour {
 		//Debug.Log("NEW CLOUD BITCHES");
 		int numMax = cloudPrefabs.Length - 1;
 		int numb = Random.Range(0, 3);
-		Transform cloud =  Instantiate(cloudPrefabs[numb], getRandomSpawnPosition(), cloudPrefabs[numb].rotation) as Transform;
+		Transform cloud =  Instantiate(cloudPrefabs[numb], getRandomSpawnCloudPosition(), cloudPrefabs[numb].rotation) as Transform;
 		
 		return cloud;		
 		
@@ -220,8 +223,14 @@ public class GameManager : MonoBehaviour {
 		
 	}
 	
-	Vector3 getRandomSpawnPosition () {
-		Vector3 aVector = new Vector3(Random.Range(-45.1F, -9.1F), Random.Range(10.5F, 13.1F), Random.Range(21.5F, 23.2F));
+	Vector3 getRandomSpawnCloudPosition () {
+		Vector3 aVector;
+		if(gameState == GameStates.gameActive) {
+			aVector = new Vector3(Random.Range(-45.1F, -9.1F), Random.Range(10.5F, 13.1F), Random.Range(21.5F, 23.2F));
+		} else {
+			aVector = new Vector3(Random.Range(-10.1F, -9.1F), Random.Range(10.5F, 13.1F), Random.Range(21.5F, 23.2F));
+
+		}
 		return aVector;
 	}
 	
