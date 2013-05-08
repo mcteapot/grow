@@ -6,6 +6,7 @@ public class FlowerController : MonoBehaviour {
 
 	public enum FlowerLevels {
 		levelDead = -1,
+		levelDying = -2,
 		levelOne = 0,
 		levelTwo = 1
 	}
@@ -54,9 +55,6 @@ public class FlowerController : MonoBehaviour {
 	
 	//public bool debugText = false;
 
-	public int getLevel () {
-		return (int)flowerLevel;
-	}
 	public float getSunLevel () {
 		return sunLevel;
 	}
@@ -74,6 +72,11 @@ public class FlowerController : MonoBehaviour {
 		}else {
 			return false;
 		}
+	}
+	
+	public void setFlowerDying (bool destorySelf) {
+		flowerLevel = FlowerLevels.levelDying;
+		StartCoroutine( flowerDestory(destorySelf) );		
 	}
 	
 	void Awake () {
@@ -117,40 +120,49 @@ public class FlowerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(flowerLevel != FlowerLevels.levelDead) {
+		if(flowerLevel != FlowerLevels.levelDead || flowerLevel != FlowerLevels.levelDying) {
 			checkLevel();
 			setPrecent();
 			levelParticle(levelIncrease);
 			decreaseLevel();
 			downLevelChecker();
-		}else if(flowerLevel == FlowerLevels.levelDead) {
-			
 		}
 	}
 	
 	void OnTriggerStay(Collider otherObject) {
 		//Debug.Log("TRIGGER");
-		
-		bool tmpActive = otherObject.transform.parent.gameObject.GetComponent<LinkCollider>().getIsActive();
-		levelIncrease = tmpActive;
-		
-		if(otherObject.tag == "cloud") {
-			//Debug.Log ("CLOUND COLLIDE");
-			if(levelIncrease) {
-				levelDecrease = false;
-				//Debug.Log("LevelDecrease: " + levelDecrease);
-				levelIncreaseWater();
-			}
+		//bool tmpActive = true;
+		//levelIncrease = tmpActive;
+		//bool tmpActive = otherObject.transform.parent.gameObject.GetComponent<LinkCollider>().getIsActive();
+		if(otherObject != null && otherObject.name != "Trrain Ground") {
+			Transform tmpTransform = otherObject.transform;
 			
-		}
-		if(otherObject.tag == "sun") {
-			//Debug.Log("SUN COLLIDE");
-			if(levelIncrease) {
-				levelDecrease = false;
-				//Debug.Log("LevelDecrease: " + levelDecrease);
-				levelIncreaseLight();
+			//Debug.LogWarning(otherObject.name);
+			//Debug.LogWarning(otherObject.transform.parent.name);
+			LinkCollider linkColiderScript = tmpTransform.parent.GetComponent<LinkCollider>();
+			if(linkColiderScript != null) {
+				bool tmpActive = linkColiderScript.getIsActive();		
+				levelIncrease = tmpActive;			
+				if(otherObject.tag == "cloud") {
+					//Debug.Log ("CLOUND COLLIDE");
+					if(levelIncrease) {
+						levelDecrease = false;
+						//Debug.Log("LevelDecrease: " + levelDecrease);
+						levelIncreaseWater();
+					}
+					
+				}
+				if(otherObject.tag == "sun") {
+					//Debug.Log("SUN COLLIDE");
+					if(levelIncrease) {
+						levelDecrease = false;
+						//Debug.Log("LevelDecrease: " + levelDecrease);
+						levelIncreaseLight();
+					}
+				}	
 			}
 		}
+		
 
 		//Debug.Log("Is ACTIVE: " + tmpActive);
 		
@@ -267,16 +279,19 @@ public class FlowerController : MonoBehaviour {
 			if(sunLevel >= sunLevelMaxOne && waterLevel >= waterLevelMaxOne) {
 				levelUp();
 			} else if (sunLevel <= 0.0F && waterLevel <= 0.0F) {
-				flowerLevel = FlowerLevels.levelDead;
-				
+				if(flowerLevel != FlowerLevels.levelDead || flowerLevel != FlowerLevels.levelDying) {
+					setFlowerDying(false);
+				}
+				Debug.Log("PLANT DEAD");
 			}
 		}else if(flowerLevel == FlowerLevels.levelTwo) {
 			if(sunLevel <= 0.0F && waterLevel <= 0.0F) {
 				//level down from two to one
 				levelDown();
-			} else if(sunLevel >= sunLevelMaxOne && waterLevel >= waterLevelMaxOne) { 
+			} else if(sunLevel >= sunLevelMaxTwo && waterLevel >= waterLevelMaxTwo) { 
 				//checks if new flower hast to spawn
-				if(flowerSpawn > 1) {
+				if(flowerSpawn < 1) {
+					Debug.LogWarning("NEW SPAWN");
 					flowerSpawn++;
 				}
 			}
@@ -347,9 +362,14 @@ public class FlowerController : MonoBehaviour {
 		}
 	}
 	
-	IEnumerator flowerDestory () {
+	IEnumerator flowerDestory (bool destorySelf) {
 		flowerSmall.animation.Play("flower_off");
 		yield return new WaitForSeconds(0.5F);
+		flowerLevel = FlowerLevels.levelDead;
+		
+		if(destorySelf) {
+			Destroy(gameObject);
+		}
 		//Destroy(gameObject);
 	}
 	

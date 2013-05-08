@@ -19,6 +19,10 @@ public class GameManager : MonoBehaviour {
 	
 	public float shadowCorrection;
 	
+	public Transform flowerPrefab;
+	
+	public int maxFlowers = 7;
+	
 	public Transform[] cloudPrefabs = new Transform[3];
 	public int maxCloudsActive = 7;
 	public int maxCloudsInActive = 3;
@@ -36,7 +40,6 @@ public class GameManager : MonoBehaviour {
 	public float lightningRate = 1.5F;
 	private float nextLighting = 0.0F;
 	
-	public int maxFlowers = 7;
 	
 	public Transform cam;
 	public Transform title;
@@ -52,12 +55,14 @@ public class GameManager : MonoBehaviour {
 		yield return new WaitForSeconds(waitTime);
 		nextCloundTime = Time.time + nextCloundIncrement;
 		maxClounds = maxCloudsActive;
+		flowerGenerate();
 		gameState = GameStates.gameActive;
 	}
 	
 	IEnumerator gameEnder (float waitTime) {
 		gameState = GameStates.gameEnd;
 		
+		killAllFlowers();
 		maxClounds = maxCloudsInActive;
 		cam.gameObject.animation.Play("camera_off");
 		title.gameObject.animation.Play("title_on");
@@ -85,17 +90,22 @@ public class GameManager : MonoBehaviour {
 		if(gameState == GameStates.gameInit){
 			Debug.Log("GAME INIT");
 			StartCoroutine( gameLoader(1.5F) );
+		
 		}else if(gameState == GameStates.gameStart) {
 			//Debug.Log("GAME START");
+		
 		}else if(gameState == GameStates.gameActive) {
 			cloudGenerate();
-			checkPlantActive();
+			checkFlowerActive();
 			quitGameKey();
+		
 		}else if(gameState == GameStates.gameEnding) {
 			//Debug.Log("GAME ENDING");
 			StartCoroutine( gameEnder(1.5F) );
+		
 		}else if(gameState == GameStates.gameEnd) {
 			//Debug.Log("GAME END");
+		
 		}else if(gameState == GameStates.gameInActive) {
 			//Debug.Log("GAME INACTIVE");
 			if(title.gameObject.GetComponent<TitleController>().isActive) {
@@ -104,10 +114,7 @@ public class GameManager : MonoBehaviour {
 			}
 		}
 	}
-	
-	void checkPlantActive() {
-		//Debug.Log("MANAGE PLANTS");
-	}
+
 	
 	void checkCloundActive () {
 		for(int i = 0; i < cloudActive.Count; i++) {
@@ -206,6 +213,51 @@ public class GameManager : MonoBehaviour {
 		return clouds;
 	}
 	
+	Transform createFlower (int num) {
+		Transform newFlower = Instantiate(flowerPrefab, getRandomSpawnFlowerPosition(num), Quaternion.identity) as Transform;
+		return newFlower;
+	}
+	
+	void checkFlowerActive() {
+		//Debug.Log("MANAGE PLANTS");
+		for(int i = 0; i < flowerActive.Count; i++) {
+			Transform activeFlower = flowerActive[i] as Transform;
+			FlowerController flowerScript;
+			flowerScript = activeFlower.GetComponent<FlowerController>();
+			
+			if(flowerScript.checkFlowerSpawn()) {
+				flowerGenerate();
+			}
+			if(flowerScript.flowerLevel == FlowerController.FlowerLevels.levelDead) {
+				flowerActive.RemoveAt(i);
+				flowerScript.setFlowerDying(true);
+				Debug.Log("GAME OVER");
+				break;
+			}
+			//Debug.Log("FLOWER LEVEL: " + flowerScript.flowerLevel); 
+		}
+	}
+	
+	void flowerGenerate () {
+		if(gameState == GameStates.gameStart) {
+			flowerActive.Add (createFlower(0));
+		} else if(gameState == GameStates.gameActive) {
+			flowerActive.Add (createFlower(1));
+		}
+	}
+	
+	void killAllFlowers () {
+		for(int i = 0; i < flowerActive.Count; i++) {
+			Transform activeFlower = flowerActive[i] as Transform;
+			FlowerController flowerScript;
+			flowerScript = activeFlower.GetComponent<FlowerController>();
+			
+			flowerScript.setFlowerDying(true);
+		
+			
+		}
+		flowerActive.Clear();
+	}
 	Vector3 getRandomStartCloudPosition( int num ) {
 		float firstNum;
 		float secondNum;
@@ -223,6 +275,7 @@ public class GameManager : MonoBehaviour {
 		
 	}
 	
+	
 	Vector3 getRandomSpawnCloudPosition () {
 		Vector3 aVector;
 		if(gameState == GameStates.gameActive) {
@@ -234,12 +287,26 @@ public class GameManager : MonoBehaviour {
 		return aVector;
 	}
 	
+	Vector3 getRandomSpawnFlowerPosition (int num) {
+		Vector3 aVector;
+		if(num == 0) {
+			aVector = new Vector3(Random.Range(12.0F, 17.0F), Random.Range(-0.2F, 0.1F), Random.Range(19.0F, 19.5F));
+		} else if(num == 1) {
+			aVector = new Vector3(Random.Range(7.5F, 21.5F), Random.Range(-0.2F, 0.1F), Random.Range(18.5F, 20.0F));
+		} else {
+			aVector = new Vector3(Random.Range(7.5F, 21.5F), Random.Range(-0.2F, 0.1F), Random.Range(18.5F, 20.0F));
+		}
+		return aVector;
+	}
+	
 	void quitGameKey () {
 		if(Input.GetKeyDown("q")) {
 			Debug.Log("Game Quit");
 			gameState = GameStates.gameEnding;
 		}
 	}
+	
+	
 	
 
 }
