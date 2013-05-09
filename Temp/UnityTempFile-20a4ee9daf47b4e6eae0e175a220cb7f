@@ -41,6 +41,8 @@
 'Assets/Scripts/LinkLightSun.cs'
 'Assets/Scripts/SunBeam.cs'
 'Assets/Scripts/SunController.cs'
+'Assets/Scripts/SunLightShifter.cs'
 'Assets/Scripts/SunLook.cs'
 'Assets/Scripts/TitleController.cs'
 'Assets/Source/CameraSelector.cs'
+'Assets/SunGlow.cs'

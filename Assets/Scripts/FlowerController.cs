@@ -134,32 +134,32 @@ public class FlowerController : MonoBehaviour {
 		//bool tmpActive = true;
 		//levelIncrease = tmpActive;
 		//bool tmpActive = otherObject.transform.parent.gameObject.GetComponent<LinkCollider>().getIsActive();
-		if(otherObject != null && otherObject.name != "Trrain Ground") {
+		if(otherObject != null) {
 			Transform tmpTransform = otherObject.transform;
-			
-			//Debug.LogWarning(otherObject.name);
-			//Debug.LogWarning(otherObject.transform.parent.name);
-			LinkCollider linkColiderScript = tmpTransform.parent.GetComponent<LinkCollider>();
-			if(linkColiderScript != null) {
-				bool tmpActive = linkColiderScript.getIsActive();		
-				levelIncrease = tmpActive;			
-				if(otherObject.tag == "cloud") {
-					//Debug.Log ("CLOUND COLLIDE");
-					if(levelIncrease) {
-						levelDecrease = false;
-						//Debug.Log("LevelDecrease: " + levelDecrease);
-						levelIncreaseWater();
+			if(otherObject.tag == "cloud" || otherObject.tag == "sun") {
+		
+				LinkCollider linkColiderScript = tmpTransform.parent.GetComponent<LinkCollider>();
+				if(linkColiderScript != null) {
+					bool tmpActive = linkColiderScript.getIsActive();		
+					levelIncrease = tmpActive;			
+					if(otherObject.tag == "cloud") {
+						//Debug.Log ("CLOUND COLLIDE");
+						if(levelIncrease) {
+							levelDecrease = false;
+							//Debug.Log("LevelDecrease: " + levelDecrease);
+							levelIncreaseWater();
+						}
+						
 					}
-					
+					if(otherObject.tag == "sun") {
+						//Debug.Log("SUN COLLIDE");
+						if(levelIncrease) {
+							levelDecrease = false;
+							//Debug.Log("LevelDecrease: " + levelDecrease);
+							levelIncreaseLight();
+						}
+					}	
 				}
-				if(otherObject.tag == "sun") {
-					//Debug.Log("SUN COLLIDE");
-					if(levelIncrease) {
-						levelDecrease = false;
-						//Debug.Log("LevelDecrease: " + levelDecrease);
-						levelIncreaseLight();
-					}
-				}	
 			}
 		}
 		
