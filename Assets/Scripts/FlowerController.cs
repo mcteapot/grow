@@ -281,8 +281,8 @@ public class FlowerController : MonoBehaviour {
 			} else if (sunLevel <= 0.0F && waterLevel <= 0.0F) {
 				if(flowerLevel != FlowerLevels.levelDead || flowerLevel != FlowerLevels.levelDying) {
 					setFlowerDying(false);
+					Debug.Log("PLANT DEAD");
 				}
-				Debug.Log("PLANT DEAD");
 			}
 		}else if(flowerLevel == FlowerLevels.levelTwo) {
 			if(sunLevel <= 0.0F && waterLevel <= 0.0F) {
@@ -363,6 +363,7 @@ public class FlowerController : MonoBehaviour {
 	}
 	
 	IEnumerator flowerDestory (bool destorySelf) {
+		Debug.Log("Flower Destroy");
 		flowerSmall.animation.Play("flower_off");
 		yield return new WaitForSeconds(0.5F);
 		flowerLevel = FlowerLevels.levelDead;

@@ -30,13 +30,13 @@ public class SunGlow : MonoBehaviour {
 	
 	void changeColor () {
 		Color sunColor = renderer.material.color;
-		Debug.Log ("SUN GLOW: " + sunColor);
+		//Debug.Log ("SUN GLOW: " + sunColor);
 		if(sunActive) {
 			sunColor = Color.Lerp(sunColor, maxColor, colorRate * Time.time);
-			Debug.Log ("COLOR CHANGE");
+			//Debug.Log ("COLOR CHANGE");
 		} else {
 			sunColor = Color.Lerp(sunColor, minColor, colorRate * Time.time);
-			Debug.Log ("COLOR CHANGE");	
+			//Debug.Log ("COLOR CHANGE");	
 		}
 		renderer.material.color = sunColor;
 	}

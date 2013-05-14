@@ -47,6 +47,7 @@
      <Compile Include="Assets\Scripts\BackgroundAlpha.cs" />
      <Compile Include="Assets\Scripts\CloudController.cs" />
      <Compile Include="Assets\Scripts\CloudShadow.cs" />
+     <Compile Include="Assets\Scripts\DeerOffSet.cs" />
      <Compile Include="Assets\Scripts\FlowerController.cs" />
      <Compile Include="Assets\Scripts\FlowerMotion.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
@@ -78,9 +79,6 @@
      <None Include="Assets\Plugins\Cloud System\Resources\Shaders\SoftCloudShader.shader" />
      <None Include="Assets\Plugins\Cloud System\Readme.txt" />
      <None Include="Assets\Shaders\Fx\InterlacePatternAdditive.shader" />
- <Reference Include="Library\ScriptAssemblies\Assembly-UnityScript-firstpass">
- <HintPath>Library\ScriptAssemblies\Assembly-UnityScript-firstpass.dll</HintPath>
- </Reference>
  <Reference Include="Assets\Plugins\Cloud System\CloudSystemFree.Runtime">
  <HintPath>Assets\Plugins\Cloud System\CloudSystemFree.Runtime.dll</HintPath>
  </Reference>

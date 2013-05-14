@@ -230,8 +230,10 @@ public class GameManager : MonoBehaviour {
 			}
 			if(flowerScript.flowerLevel == FlowerController.FlowerLevels.levelDead) {
 				flowerActive.RemoveAt(i);
-				flowerScript.setFlowerDying(true);
+				//flowerScript.setFlowerDying(true);
+				Destroy(activeFlower.gameObject);
 				Debug.Log("GAME OVER");
+				gameState = GameStates.gameEnding;
 				break;
 			}
 			//Debug.Log("FLOWER LEVEL: " + flowerScript.flowerLevel); 
