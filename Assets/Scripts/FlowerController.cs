@@ -42,6 +42,8 @@ public class FlowerController : MonoBehaviour {
 	private bool levelDecrease = false;
 	public bool beingEatan = false;
 	
+	public bool debug = false;
+	
 	private int flowerSpawn = 0;
 	// Flower Parts
 	private Transform flowerSmall;
@@ -124,7 +126,9 @@ public class FlowerController : MonoBehaviour {
 			checkLevel();
 			setPrecent();
 			levelParticle(levelIncrease);
-			decreaseLevel();
+			if(!debug) {
+				decreaseLevel();
+			}
 			downLevelChecker();
 		}
 	}
