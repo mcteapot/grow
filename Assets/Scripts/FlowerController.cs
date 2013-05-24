@@ -42,7 +42,7 @@ public class FlowerController : MonoBehaviour {
 	private bool levelDecrease = false;
 	public bool beingEatan = false;
 	
-	public bool debug = false;
+	public bool debuging = false;
 	
 	private int flowerSpawn = 0;
 	// Flower Parts
@@ -126,14 +126,14 @@ public class FlowerController : MonoBehaviour {
 			checkLevel();
 			setPrecent();
 			levelParticle(levelIncrease);
-			if(!debug) {
+			if(!debuging) {
 				decreaseLevel();
 			}
 			downLevelChecker();
 		}
 	}
 	
-	void OnTriggerStay(Collider otherObject) {
+	void OnTriggerStay (Collider otherObject) {
 		//Debug.Log("TRIGGER");
 		//bool tmpActive = true;
 		//levelIncrease = tmpActive;
@@ -172,12 +172,18 @@ public class FlowerController : MonoBehaviour {
 		
 	}
 	
-	void OnTriggerExit(Collider otherObject) {
-		levelIncrease = false;
+	void OnTriggerExit (Collider otherObject) {
+		if(otherObject.tag == "deer"){
+				
+		}else {
+			levelIncrease = false;
+			if(!beingEatan) {
 		
-		//Debug.Log("ELVIS HAS LEFT THE BUILDING");
-		//StartCoroutine( decreseLevelCheck(decreaseLevelIncrement) );
-		incrementDownLevelTime();
+				//Debug.Log("ELVIS HAS LEFT THE BUILDING");
+				//StartCoroutine( decreseLevelCheck(decreaseLevelIncrement) );
+				incrementDownLevelTime();		
+			}
+		}
 	}
 	
 	void levelIncreaseWater () {
@@ -212,6 +218,32 @@ public class FlowerController : MonoBehaviour {
 				tmpWaterMaxLevel = waterLevelMaxOne;
 				tmpSunMaxLevel = sunLevelMaxOne;
 				
+				float tmpWaterLevel = Mathf.MoveTowards(waterLevel, 0.0F, levelDecreaseOneEatineRate * Time.deltaTime);
+				float tmpSunLevel = Mathf.MoveTowards(sunLevel, 0.0F, levelDecreaseOneEatineRate * Time.deltaTime);
+			
+				waterLevel = Mathf.Clamp(tmpWaterLevel, 0.0F, tmpWaterMaxLevel);
+				sunLevel = Mathf.Clamp(tmpSunLevel, 0.0F, tmpSunLevel);
+			
+			}else if(flowerLevel == FlowerLevels.levelTwo){
+				tmpWaterMaxLevel = waterLevelMaxTwo;
+				tmpSunMaxLevel = sunLevelMaxTwo;
+
+				float tmpWaterLevel = Mathf.MoveTowards(waterLevel, 0.0F, levelDecreaseTwoEatinRate * Time.deltaTime);
+				float tmpSunLevel = Mathf.MoveTowards(sunLevel, 0.0F, levelDecreaseTwoEatinRate * Time.deltaTime);
+			
+				waterLevel = Mathf.Clamp(tmpWaterLevel, 0.0F, tmpWaterMaxLevel);
+				sunLevel = Mathf.Clamp(tmpSunLevel, 0.0F, tmpSunLevel);
+			}
+			//Debug.Log("LEVEL IS DECREASING");
+		}else if(beingEatan) {
+			Debug.Log("PLANT IS BEING EATING");
+			float tmpWaterMaxLevel = 100.0F;
+			float tmpSunMaxLevel = 100.0F;
+			
+			if(flowerLevel == FlowerLevels.levelOne) {
+				tmpWaterMaxLevel = waterLevelMaxOne;
+				tmpSunMaxLevel = sunLevelMaxOne;
+				
 				float tmpWaterLevel = Mathf.MoveTowards(waterLevel, 0.0F, levelDecreaseOneRate * Time.deltaTime);
 				float tmpSunLevel = Mathf.MoveTowards(sunLevel, 0.0F, levelDecreaseOneRate * Time.deltaTime);
 			
@@ -228,9 +260,6 @@ public class FlowerController : MonoBehaviour {
 				waterLevel = Mathf.Clamp(tmpWaterLevel, 0.0F, tmpWaterMaxLevel);
 				sunLevel = Mathf.Clamp(tmpSunLevel, 0.0F, tmpSunLevel);
 			}
-			//Debug.Log("LEVEL IS DECREASING");
-		}else if(beingEatan) {
-			Debug.Log("PLANT IS BEING EATING");
 		}
 			
 
@@ -295,7 +324,7 @@ public class FlowerController : MonoBehaviour {
 			} else if(sunLevel >= sunLevelMaxTwo && waterLevel >= waterLevelMaxTwo) { 
 				//checks if new flower hast to spawn
 				if(flowerSpawn < 1) {
-					Debug.LogWarning("NEW SPAWN");
+					//Debug.LogWarning("NEW SPAWN");
 					flowerSpawn++;
 				}
 			}
