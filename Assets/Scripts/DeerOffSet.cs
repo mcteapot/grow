@@ -9,6 +9,7 @@ public class DeerOffSet : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
+		
 		startVect = new Vector3(transform.localPosition.x, transform.localPosition.y, transform.localPosition.z);
 		//setPosition();
 	}

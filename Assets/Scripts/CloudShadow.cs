@@ -9,6 +9,7 @@ public class CloudShadow : MonoBehaviour {
 	public Transform rainParticle;
 	
 	private bool isActive;
+	public bool lightningActive = false;
 	
 	public Transform lightningSky;
 	
@@ -82,10 +83,13 @@ public class CloudShadow : MonoBehaviour {
 	}
 	
 	void setLightning (bool newLight) {
+
+		lightningActive = newLight;
 		lightningSky.SendMessage("setIsLightningEnabled", newLight);
 		if(!lightningSky.audio.isPlaying && newLight) {
 			lightningSky.audio.Play();
 		}
+
 	}
 	
     void OnDestroy() {

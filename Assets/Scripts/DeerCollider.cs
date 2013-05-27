@@ -9,9 +9,21 @@ public class DeerCollider : MonoBehaviour {
 	
 	public bool deerScared = false;
 	
+	public bool deerJump = false;
+	public bool deerJumped = false;
+	
+	private GameObject cloundShadowObject;
+	
+	private CloudShadow cloundShadow;
+	
 	// Use this for initialization
 	void Start () {
-	
+		
+		cloundShadowObject = GameObject.Find("Cloud Dark Shadow");
+		
+		if(cloundShadowObject) {
+			cloundShadow = cloundShadowObject.GetComponent<CloudShadow>();
+		}
 	}
 	
 	// Update is called once per frame
@@ -22,18 +34,30 @@ public class DeerCollider : MonoBehaviour {
 	void OnTriggerEnter (Collider otherObject) {
 		if(otherObject.tag == "flower" && !deerScared) {
 			flowerEnter = true;
+			Debug.Log("Flower COLIDE");
 		}
-
+		if(otherObject.tag == "jump" && deerScared && !deerJumped) {
+			deerJump = true;
+			deerJumped = true;
+		}	
 	}
-/*	
+	
 	void OnTriggerStay (Collider otherObject) {
 		if(otherObject.tag == "flower" && flowerCollide) {
-			Debug.Log("Flower COLIDE");
+			//Debug.Log("Flower COLIDE");
 			//flowerCollide = true;
 			//otherObject.GetComponent<FlowerController>().beingEatan = true;
 		}
+		
+		if(otherObject.tag == "cloud" && flowerCollide && !deerScared) {
+			//Debug.Log("Cloud COLIDE");
+			if(cloundShadow.lightningActive) {
+				Debug.Log("DEER LIGHTNING SCARED");
+				deerScared = true;
+			}
+		}
 	}
-*/	
+	
 	void OnTriggerExit (Collider otherObject) {
 		if(otherObject.tag == "flower") {
 			flowerEnter = false;

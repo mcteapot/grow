@@ -131,9 +131,9 @@ public class GameManager : MonoBehaviour {
 				}
 				if(cloundScript.getCloundTintAOn() <= 0.06) {
 					cloudShadow.SendMessage("setActive", false);
+					cloudShadow.SendMessage("setLightning", false);
 					
 					Debug.Log("cloud destoryed");
-					cloudShadow.SendMessage("setLightning", false);
 					Destroy(activeClound.gameObject);
 					cloudActive.RemoveAt(i);
 					
