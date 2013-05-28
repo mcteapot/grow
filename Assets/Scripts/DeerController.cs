@@ -62,15 +62,21 @@ public class DeerController : MonoBehaviour {
 		preInitedCheck();
 	}
 	
-	
-	// Use this for initialization
-	void Start () {
+	void Awake () {
 		deerColliderObject = transform.Find("DeerCollider");
 		deerCollider = deerColliderObject.GetComponent<DeerCollider>();
 		
 		anim = GetComponentInChildren<Animator>();
 		
 		initBounds();
+	}
+	// Use this for initialization
+	void Start () {
+		//deerColliderObject = transform.Find("DeerCollider");
+		//deerCollider = deerColliderObject.GetComponent<DeerCollider>();
+		
+		//anim = GetComponentInChildren<Animator>();
+		
 		
 		if(debuggin) {
 			
@@ -97,7 +103,7 @@ public class DeerController : MonoBehaviour {
 	
 	void initBounds () {
 		enterPointZ[0] = new MinMax<float>(19.0F, 22.6F); // bottom
-		enterPointZ[1] = new MinMax<float>(0.6F, 13.1F); // top side
+		enterPointZ[1] = new MinMax<float>(0.6F, 10.1F); // top side
 		enterPointZ[2] = new MinMax<float>(0.3F, 1.1F); // top back
 		
 		enterPointX[0] = new MinMax<float>(-4.3F, -5.1F); // left side
@@ -288,9 +294,9 @@ public class DeerController : MonoBehaviour {
 			
 			deerLevel = DeerLevels.inited;
 			
-			if(deerLevel == DeerLevels.inited) {
-				anim.SetBool("Walk", true);
-			}
+			anim.SetBool("Walk", true);
+			Debug.Log("Deer set to walk");
+
 			
 		} 
 	}

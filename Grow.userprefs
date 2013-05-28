@@ -1,6 +1,19 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GameManager.cs">
+    <Files>
+      <File FileName="Assets/Scripts/DeerCollider.cs" Line="41" Column="14" />
+      <File FileName="Assets/Scripts/DeerController.cs" Line="292" Column="34" />
+      <File FileName="Assets/Scripts/GameManager.cs" Line="320" Column="51" />
+      <File FileName="Assets/Scripts/FlowerController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/LinkLightSun.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/SunGlow.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/MinMax.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/LinkCollider.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/CloudShadow.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/DeerOffSet.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

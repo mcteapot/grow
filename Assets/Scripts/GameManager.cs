@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour {
 	
 	private ArrayList cloudActive = new ArrayList();
 	private ArrayList flowerActive = new ArrayList();
+	private ArrayList deerActive = new ArrayList();
 	
 	public float shadowCorrection;
 	
@@ -41,6 +42,15 @@ public class GameManager : MonoBehaviour {
 	private float nextLighting = 0.0F;
 	
 	
+	public Transform deerPrefab;
+	
+	public int maxDeerActive;
+	public float nextDeerIncrement = 10.0F;
+	private float nextDeerTime = 0.0F;
+	
+	
+	private bool spawnDeers = false;
+	
 	public Transform cam;
 	public Transform title;
 	
@@ -62,6 +72,8 @@ public class GameManager : MonoBehaviour {
 	IEnumerator gameEnder (float waitTime) {
 		gameState = GameStates.gameEnd;
 		
+		spawnDeers = false;
+			
 		killAllFlowers();
 		maxClounds = maxCloudsInActive;
 		cam.gameObject.animation.Play("camera_off");
@@ -81,6 +93,7 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		//Debug.Log("flower count: " + flowerActive.Count);
 		checkCloundActive();
 		checkCloundBound();
 		gameManage();
@@ -97,6 +110,7 @@ public class GameManager : MonoBehaviour {
 		}else if(gameState == GameStates.gameActive) {
 			cloudGenerate();
 			checkFlowerActive();
+			deerGenerate();
 			quitGameKey();
 		
 		}else if(gameState == GameStates.gameEnding) {
@@ -299,6 +313,53 @@ public class GameManager : MonoBehaviour {
 			aVector = new Vector3(Random.Range(7.5F, 21.5F), Random.Range(-0.2F, 0.1F), Random.Range(18.5F, 20.0F));
 		}
 		return aVector;
+	}
+	
+	void deerGenerate () {
+	
+		if(spawnDeers == false && flowerActive.Count > 0) {
+			Debug.Log("DEER SPAWNED");
+			spawnDeers = true;
+			Transform newestFlower = flowerActive[flowerActive.Count - 1] as Transform;
+			createDeer(newestFlower);
+		}
+		
+		//if(spawnDeers) {
+		//	for(int i = 0; i < deerActive.Count; i++) {
+		//	}
+		//}
+	}
+	
+	Transform createDeer (Transform flower) {
+		Transform newDeer = Instantiate(deerPrefab) as Transform;
+		
+		DeerController deerController;
+		deerController = newDeer.GetComponent<DeerController>();
+		
+		bool left = (flower.position.x > 14.5F) ? true : false;
+		bool bottom = (((int)Mathf.Round((Random.value))) == 1) ? true : false;
+		
+		//determine spawn location
+		if(left) {
+			// left
+			if(bottom) {
+				deerController.setPreInits(flower, DeerController.MovePoint.leftBottom);
+			} else {
+				deerController.setPreInits(flower, DeerController.MovePoint.leftSide);
+			}
+		} else { 
+			//right
+			if(bottom) {
+				deerController.setPreInits(flower, DeerController.MovePoint.rightBottom);
+			} else {
+				deerController.setPreInits(flower, DeerController.MovePoint.rightSide);
+			}
+		}
+		
+		deerActive.Add(newDeer);
+		
+		return newDeer;
+		
 	}
 	
 	void quitGameKey () {
