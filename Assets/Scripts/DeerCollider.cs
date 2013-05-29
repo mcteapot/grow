@@ -32,9 +32,10 @@ public class DeerCollider : MonoBehaviour {
 	}
 	
 	void OnTriggerEnter (Collider otherObject) {
+		//Debug.Log("Collder : " + otherObject.tag);
 		if(otherObject.tag == "flower" && !deerScared) {
 			flowerEnter = true;
-			Debug.Log("Flower COLIDE");
+			Debug.Log("DEER Flower ENTER");
 		}
 		if(otherObject.tag == "jump" && deerScared && !deerJumped) {
 			deerJump = true;
@@ -43,11 +44,10 @@ public class DeerCollider : MonoBehaviour {
 	}
 	
 	void OnTriggerStay (Collider otherObject) {
-		if(otherObject.tag == "flower" && flowerCollide) {
-			//Debug.Log("Flower COLIDE");
-			//flowerCollide = true;
-			//otherObject.GetComponent<FlowerController>().beingEatan = true;
-		}
+		//if(otherObject.tag == "flower" && !deerScared) {
+		//	flowerEnter = true;
+		//	Debug.Log("DEER Flower ENTER");
+		//}
 		
 		if(otherObject.tag == "cloud" && flowerCollide && !deerScared) {
 			//Debug.Log("Cloud COLIDE");
@@ -59,14 +59,15 @@ public class DeerCollider : MonoBehaviour {
 	}
 	
 	void OnTriggerExit (Collider otherObject) {
-		if(otherObject.tag == "flower") {
+		if(otherObject.tag == "flower" && !deerScared) {
+			//Debug.Log("Flower ENTER Exit");
 			flowerEnter = false;
 		}
 		if(otherObject.tag == "flower" && !deerScared) {
 			Debug.Log("Flower COLIDE Exit");
 			flowerCollide = false;
 			//otherObject.GetComponent<FlowerController>().beingEatan = false;
-			deerScared = true;
+			//deerScared = true;
 		}	
 	}
 }

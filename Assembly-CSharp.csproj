@@ -44,6 +44,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\AudioPlayer.cs" />
      <Compile Include="Assets\Scripts\BackgroundAlpha.cs" />
      <Compile Include="Assets\Scripts\CloudController.cs" />
      <Compile Include="Assets\Scripts\CloudShadow.cs" />

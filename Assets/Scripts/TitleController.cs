@@ -21,7 +21,7 @@ public class TitleController : MonoBehaviour {
 	}
 	void OnMouseUp () {
 		if(checkClick) {
-			Debug.Log("MOUSE CLICK"); 
+			//Debug.Log("MOUSE CLICK"); 
 			isActive = true;
 			checkClick = false;
 		}

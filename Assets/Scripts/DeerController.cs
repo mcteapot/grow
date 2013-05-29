@@ -108,8 +108,8 @@ public class DeerController : MonoBehaviour {
 		
 		enterPointX[0] = new MinMax<float>(-4.3F, -5.1F); // left side
 		enterPointX[1] = new MinMax<float>(34.5F, 35.1F); // right side
-		enterPointX[2] = new MinMax<float>(0.9F, 14.0F); // left back
-		enterPointX[3] = new MinMax<float>(15.0F, 24.5F); // right back
+		enterPointX[2] = new MinMax<float>(0.9F, 14.3F); // left back
+		enterPointX[3] = new MinMax<float>(15.8F, 24.5F); // right back
 	}
 	
 	// Lot of starting shit happends here
@@ -265,6 +265,7 @@ public class DeerController : MonoBehaviour {
 			scaredOff();
 			break;
 		case DeerLevels.dead:
+			selfDestroy();
 			break;
 		default:
 			break;
@@ -286,6 +287,13 @@ public class DeerController : MonoBehaviour {
 			}
 		}
 	}
+	
+	void selfDestroy () {
+		if(gameEnd) {
+			Destroy(gameObject);
+		}
+	}
+	
 	void preInitedCheck() {
 		if(flowerLink) {
 			findStartEndPoint();
@@ -310,13 +318,15 @@ public class DeerController : MonoBehaviour {
 				Vector3 tmpVector = Vector3.MoveTowards(transform.position, flowerLink.position, walkSpeed * Time.deltaTime);
 				transform.position = new Vector3(tmpVector.x, transform.position.y, tmpVector.z);
 				
-				//Debug.Log("Deer Distance X" + Mathf.Abs(transform.position.x - flowerLink.position.x));
 				float distanceX = Mathf.Abs(transform.position.x - flowerLink.position.x);
-				if(distanceX <= 2.323 && deerCollider.flowerEnter) {
+				//Debug.Log("Deer Distance X" + distanceX);
+				
+				if(distanceX <= 2.32F && deerCollider.flowerEnter) {
 					deerCollider.flowerCollide = true;
 					flowerLink.GetComponent<FlowerController>().beingEatan = true;
-					Debug.Log("Flower COLIDE");
+					Debug.Log("DEER Flower Eating");
 				}
+				
 			} else {
 				deerLevel = DeerLevels.flowerHit;
 			}
@@ -384,7 +394,7 @@ public class DeerController : MonoBehaviour {
 		
 		if(distanceX <= 0.323) {
 			deerLevel = DeerLevels.dead;
-			Debug.Log("Deer End");
+			//Debug.Log("Deer End");
 		}
 	}
 	

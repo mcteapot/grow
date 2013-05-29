@@ -236,7 +236,7 @@ public class FlowerController : MonoBehaviour {
 			}
 			//Debug.Log("LEVEL IS DECREASING");
 		}else if(beingEatan) {
-			Debug.Log("PLANT IS BEING EATING");
+			//Debug.Log("PLANT IS BEING EATING");
 			float tmpWaterMaxLevel = 100.0F;
 			float tmpSunMaxLevel = 100.0F;
 			
@@ -396,7 +396,7 @@ public class FlowerController : MonoBehaviour {
 	}
 	
 	IEnumerator flowerDestory (bool destorySelf) {
-		Debug.Log("Flower Destroy");
+		//Debug.Log("Flower Destroy");
 		flowerSmall.animation.Play("flower_off");
 		yield return new WaitForSeconds(0.5F);
 		flowerLevel = FlowerLevels.levelDead;

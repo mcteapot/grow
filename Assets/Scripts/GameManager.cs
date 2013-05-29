@@ -44,8 +44,9 @@ public class GameManager : MonoBehaviour {
 	
 	public Transform deerPrefab;
 	
-	public int maxDeerActive;
+	public int maxDeers = 0;
 	public float nextDeerIncrement = 10.0F;
+	private float tmpNextDeerIncrement;
 	private float nextDeerTime = 0.0F;
 	
 	
@@ -53,6 +54,9 @@ public class GameManager : MonoBehaviour {
 	
 	public Transform cam;
 	public Transform title;
+	
+	public Transform audioDeer;
+	public Transform audioFlower;
 	
 	//Game Manage functions
 	
@@ -72,9 +76,17 @@ public class GameManager : MonoBehaviour {
 	IEnumerator gameEnder (float waitTime) {
 		gameState = GameStates.gameEnd;
 		
-		spawnDeers = false;
-			
 		killAllFlowers();
+		
+		tmpNextDeerIncrement = nextDeerIncrement;
+		scareAllDeers();
+		
+		AudioPlayer audioDeerPlayer = audioDeer.GetComponent<AudioPlayer>();
+		audioDeerPlayer.setPlayState(0);
+		
+		AudioPlayer audioFlowerPlayer = audioFlower.GetComponent<AudioPlayer>();
+		audioFlowerPlayer.setPlayState(0);
+		
 		maxClounds = maxCloudsInActive;
 		cam.gameObject.animation.Play("camera_off");
 		title.gameObject.animation.Play("title_on");
@@ -84,11 +96,14 @@ public class GameManager : MonoBehaviour {
 		gameState = GameStates.gameInActive;
 	}
 	void Awake () {
-		cloudActive = createCloundsStart();	
+		cloudActive = createCloundsStart();
+		tmpNextDeerIncrement = nextDeerIncrement;
+		maxDeers = 0;
 	}
 	// Use this for initialization
 	void Start () {
-	
+		//AudioPlayer audioPlayer = audioDeer.GetComponent<AudioPlayer>();
+		//audioPlayer.setPlayState(2);
 	}
 	
 	// Update is called once per frame
@@ -111,6 +126,10 @@ public class GameManager : MonoBehaviour {
 			cloudGenerate();
 			checkFlowerActive();
 			deerGenerate();
+			
+			playDeerAudio();
+			playFlowerAudio();
+			
 			quitGameKey();
 		
 		}else if(gameState == GameStates.gameEnding) {
@@ -200,7 +219,7 @@ public class GameManager : MonoBehaviour {
 	
 	void cloudGenerate () {
 		
-		if(cloudActive.Count <= maxClounds) {
+		if(cloudActive.Count < maxClounds) {
 			if(Time.time > nextCloundTime) {
 				//Debug.Log("CREATE generator" + cloudActive.Count);
 				//Debug.Log("CREATE FUCKING CLOUD");
@@ -274,6 +293,7 @@ public class GameManager : MonoBehaviour {
 		}
 		flowerActive.Clear();
 	}
+	
 	Vector3 getRandomStartCloudPosition( int num ) {
 		float firstNum;
 		float secondNum;
@@ -290,7 +310,6 @@ public class GameManager : MonoBehaviour {
 		return aVector;
 		
 	}
-	
 	
 	Vector3 getRandomSpawnCloudPosition () {
 		Vector3 aVector;
@@ -317,17 +336,55 @@ public class GameManager : MonoBehaviour {
 	
 	void deerGenerate () {
 	
-		if(spawnDeers == false && flowerActive.Count > 0) {
+		if(spawnDeers == false && flowerActive.Count > 2) {
 			Debug.Log("DEER SPAWNED");
+			maxDeers = 1;
 			spawnDeers = true;
+			nextDeerTime = Time.time + tmpNextDeerIncrement;
 			Transform newestFlower = flowerActive[flowerActive.Count - 1] as Transform;
 			createDeer(newestFlower);
+		} 
+		
+		if(maxDeers == 1 && flowerActive.Count == 4) {
+			tmpNextDeerIncrement = tmpNextDeerIncrement * 0.5F;
+			maxDeers = 2;
 		}
 		
-		//if(spawnDeers) {
-		//	for(int i = 0; i < deerActive.Count; i++) {
-		//	}
-		//}
+		if(maxDeers == 2 && flowerActive.Count == 6) {
+			tmpNextDeerIncrement = tmpNextDeerIncrement * 0.5F;
+			maxDeers = 3;
+		}
+		
+		if(spawnDeers) {
+			for(int i = 0; i < deerActive.Count; i++) {
+				Transform activeDeer = deerActive[i] as Transform;
+				DeerController deerController;
+				deerController = activeDeer.GetComponent<DeerController>();
+				
+				if(deerController.deerLevel == DeerController.DeerLevels.dead) {
+					Debug.Log("Deer is dead and remove");
+					Destroy(activeDeer.gameObject);
+					deerActive.RemoveAt(i);
+					if(i == (maxDeers - 1)) {
+						Debug.Log("New Deer 3 Time");
+						nextDeerTime = Time.time + tmpNextDeerIncrement;
+					}
+					break;
+				}
+				
+			}
+			
+			if(deerActive.Count < maxDeers) {
+				if(Time.time > nextDeerTime) {
+					int randomFlower = Random.Range(0, flowerActive.Count);
+					Transform aFlower = flowerActive[randomFlower] as Transform;
+					
+	        		createDeer(aFlower);
+					
+					nextDeerTime = Time.time + tmpNextDeerIncrement;
+	    		}
+			}
+		}
 	}
 	
 	Transform createDeer (Transform flower) {
@@ -360,6 +417,41 @@ public class GameManager : MonoBehaviour {
 		
 		return newDeer;
 		
+	}
+	
+	void scareAllDeers () {
+		if(spawnDeers) {
+			for(int i = 0; i < deerActive.Count; i++) {
+				Transform activeDeer = deerActive[i] as Transform;
+				DeerController deerController;
+				deerController = activeDeer.GetComponent<DeerController>();
+				
+				deerController.gameEnd = true;
+				
+			}
+			deerActive.Clear();
+		}
+		spawnDeers = false;
+		maxDeers = 0;
+	}
+	
+	void playDeerAudio () {
+		AudioPlayer audioDeerPlayer = audioDeer.GetComponent<AudioPlayer>();
+ 		if(deerActive.Count >= 2) {
+			audioDeerPlayer.setPlayState(2);
+		}
+
+	}
+	
+	void playFlowerAudio () {
+		AudioPlayer audioFlowerPlayer = audioFlower.GetComponent<AudioPlayer>();
+		if(flowerActive.Count >= 6) {
+			audioFlowerPlayer.setPlayState(3);
+		} else if(flowerActive.Count >= 4) {
+			audioFlowerPlayer.setPlayState(2);
+		} else if(flowerActive.Count >= 2) {
+			audioFlowerPlayer.setPlayState(1);
+		}
 	}
 	
 	void quitGameKey () {
